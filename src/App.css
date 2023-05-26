@@ -2,52 +2,67 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
 }
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
 
 .notes {
   font-style: italic;
 }
 
-
 .b2b {
   font-style: italic;
   color: #888;
+}
+
+.cal {
+  display: flex;
+  flex-direction: row;
+}
+
+.cal .hour {
+  z-index: 10;
+  display: flex;
+  grid-column: 1;
+  grid-row: auto /span 4;
+  border-top: solid 1px hsl(0, 0%, 40%);
+}
+
+.cal .hour:first-child {
+  border-top: none;
+}
+
+.stage {
+  width: 80%;
+  display: grid;
+  grid-auto-rows: 0.5rem;
+
+  background-color: hsl(0, 0%, 16%);
+}
+
+.times {
+  display: grid;
+  grid-auto-rows: 0.5rem;
+}
+
+.time {
+  grid-row-end: span 2;
+  padding: 0 0.5em;
+  
+  font-size: 0.6rem;
+  font-weight: 600;
+  vertical-align: middle;
+  line-height: 1rem;
+}
+
+.set {
+  margin: 0 0.5rem;
+  padding: 0.25rem;
+  font-size: 0.8rem;
+  z-index: 50;
+  grid-column: 1;
+  background-color: hsl(180, 20%, 30%);
+
+}
+
+.set.adjacent {
+  border-top: solid 1px hsl(180, 20%, 60%);
 }
