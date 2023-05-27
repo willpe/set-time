@@ -66,7 +66,6 @@ Havana Beach Club
 `;
 
 function Stage(stage, day) {
-  console.log(stage.id);
   return (
     <div key={stage.id} className="stage" data-id={stage.id}>
       {TimeRows(day.opens, day.closes)}
@@ -165,12 +164,12 @@ function Day({ day }) {
 }
 
 function App() {
-  const timetable = parse(schedule);
+  const timetable = parse("Explorations 2023", schedule);
 
   return (
     <>
-      <h1>Explorations 2023</h1>
-      {timetable.map((day) => (
+      <h1 data-id={timetable.id}>Explorations 2023</h1>
+      {timetable.days.map((day) => (
         <Day day={day} />
       ))}
     </>

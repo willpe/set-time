@@ -126,7 +126,7 @@ function parseSet(line, date, previousSet) {
   return null;
 }
 
-export const parse = (schedule) => {
+export const parse = (name, schedule) => {
   const lines = schedule.split("\n");
   const days = [];
   let day = null;
@@ -161,6 +161,12 @@ export const parse = (schedule) => {
     }
   }
 
+  const festival = {
+    id: name.replace(/\W/g, "-").toLowerCase(),
+    name: name,
+    days: days,
+  };
+
   for (const d of days) {
     let dayOpens = null;
     let dayCloses = null;
@@ -181,5 +187,5 @@ export const parse = (schedule) => {
     d.closes = dayCloses;
   }
 
-  return days;
+  return festival;
 };
