@@ -1,90 +1,185 @@
-import './App.css'
+import "./App.css";
 
-// Regular expression patterns
-const dayPattern = /^#\s+(.*)/;
-const stagePatten = /^##\s+(.*)/;
-const setPattern = /^- (\d{2}:\d{2})-(\d{2}:\d{2}) (.*)$/;
+const shortTimeStyle = { hourCycle: "h24", timeStyle: "short" };
 
-// parse the day, stage and sets from the markdown string
-const parse = (schedule) => {
-  const lines = schedule.split('\n');
+function parseDay(line) {
+  const dayPattern = /^#\s+(.*)/;
+
+  const dayMatch = line.match(dayPattern);
+  if (dayMatch) {
+    const date = new Date(dayMatch[1]);
+    const dayName = date.toLocaleDateString(navigator.language, {
+      weekday: "long",
+    });
+
+    return {
+      id: date.toISOString().slice(0, 10),
+      name: dayName,
+      date: date,
+      opens: null,
+      closes: null,
+      stages: [],
+    };
+  }
+
+  return null;
+}
+
+function parseStage(line) {
+  const stagePatten = /^##\s+(.*)/;
+
+  const stageMatch = line.match(stagePatten);
+  if (stageMatch) {
+    // replace all non-alphanumeric characters with dashes
+    const stageId = stageMatch[1].replace(/\W/g, "-").toLowerCase();
+
+    return {
+      id: stageId,
+      name: stageMatch[1],
+      opens: null,
+      closes: null,
+      sets: [],
+    };
+  }
+
+  return null;
+}
+
+function parseTime(time, date) {
+  const timePattern = /^(\d{2}):(\d{2})$/;
+
+  const timeMatch = time.match(timePattern);
+  if (timeMatch) {
+    const hours = parseInt(timeMatch[1]);
+    const minutes = parseInt(timeMatch[2]);
+
+    const result = new Date(date);
+    result.setHours(hours);
+    result.setMinutes(minutes);
+
+    return result;
+  }
+
+  return null;
+}
+
+function parsePerformance(value) {
+  let artist = value;
+  let notes = null;
+  let b2b = null;
+
+  // if the performance ends with notes, like (Live), then extract them out
+  const match = value.match(/^(.*)\((.*)\)$/);
+  if (match) {
+    artist = match[1];
+    notes = match[2];
+  }
+
+  // if the performance is b2b, like 'Jody Wisternoff b2b Simon Doty', then split out the artists
+  const artists = value.split(" b2b ");
+  if (artists.length > 1) {
+    artist = artists[0];
+    b2b = artists[1];
+  }
+
+  return {
+    artist: artist,
+    b2b: b2b,
+    notes: notes,
+  };
+}
+
+function parseSet(line, date, previousSet) {
+  const setPattern = /^- (\d{2}:\d{2})-(\d{2}:\d{2}) (.*)$/;
+
+  const setMatch = line.match(setPattern);
+  if (setMatch) {
+    const startTime = parseTime(setMatch[1], date);
+    const endTime = parseTime(setMatch[2], date);
+
+    if (endTime.getTime() < startTime.getTime()) {
+      endTime.setDate(endTime.getDate() + 1);
+    }
+
+    // replace all non-alphanumeric characters with dashes
+    const setId =
+      setMatch[1].replace(/:/g, "") +
+      "-" +
+      setMatch[3].replace(/\W/g, "-").toLowerCase();
+
+    const performance = parsePerformance(setMatch[3]);
+
+    return {
+      id: setId,
+      startTime: startTime,
+      start: startTime.toLocaleTimeString(navigator.language, shortTimeStyle),
+      endTime: endTime,
+      end: endTime.toLocaleTimeString(navigator.language, shortTimeStyle),
+      duration: (endTime.getTime() - startTime.getTime()) / 1000 / 60 / 60,
+      performance: performance,
+      adjacent: !!(
+        previousSet && previousSet.endTime.getTime() === startTime.getTime()
+      ),
+    };
+  }
+
+  return null;
+}
+
+export const parse = (schedule) => {
+  const lines = schedule.split("\n");
   const days = [];
   let day = null;
   let date = null;
   let stage = null;
 
   for (const line of lines) {
-    console.log(line);
-
-    const dayMatch = line.match(dayPattern);
+    const dayMatch = parseDay(line);
     if (dayMatch) {
-      date = new Date(dayMatch[1]);
-      day = {
-        name: dayMatch[1],
-        date: date,
-        stages: [],
-      };
+      day = dayMatch;
+      date = day.date;
 
-      console.log(day);
       days.push(day);
       continue;
     }
 
-    const stageMatch = line.match(stagePatten);
+    const stageMatch = parseStage(line);
     if (stageMatch) {
-      if (stage !== null) {
-        stage.opens = stage.sets[0].start;
-        stage.closes = stage.sets[stage.sets.length - 1].end;
-      }
-
-      stage = {
-        name: stageMatch[1],
-        sets: [],
-      };
+      stage = stageMatch;
+      date = day.date;
 
       day.stages.push(stage);
       continue;
     }
 
-    const setMatch = line.match(setPattern);
+    const setMatch = parseSet(line, date, stage?.sets[stage.sets.length - 1]);
     if (setMatch) {
+      stage.sets.push(setMatch);
 
-      // compute the number of hours between the start time and the end time
-      const start = setMatch[1].split(':');
-      const end = setMatch[2].split(':');
-      let hours = parseInt(end[0]) - parseInt(start[0]);
-      const minutes = parseInt(end[1]) - parseInt(start[1]);
-
-      // handle sets that end after midnight (e.g. 23:00-01:00
-      if (hours < 0) { 
-        hours += 24; 
-        let tomorrow = new Date(date);
-        tomorrow.setDate(date.getDate() + 1);
-
-        date = tomorrow;
-      }
-
-      const duration = hours + minutes / 60;
-      const startTime = new Date(date);
-      startTime.setHours(hours);
-      startTime.setMinutes(minutes);
-
-      const set = {
-        start: setMatch[1],
-        startTime: startTime,
-        end: setMatch[2],
-        performance: setMatch[3],
-        duration: duration
-      };
-      stage.sets.push(set);
+      date = setMatch.endTime;
       continue;
     }
   }
 
-  console.log(days);
+  for (const d of days) {
+    let dayOpens = null;
+    let dayCloses = null;
+
+    for (const s of d.stages) {
+      s.opens = s.sets[0].startTime;
+      if (dayOpens === null || s.opens < dayOpens) {
+        dayOpens = s.opens;
+      }
+
+      s.closes = s.sets[s.sets.length - 1].endTime;
+      if (dayCloses === null || s.closes > dayCloses) {
+        dayCloses = s.closes;
+      }
+    }
+
+    d.opens = dayOpens;
+    d.closes = dayCloses;
+  }
+
   return days;
 };
-
-export default function Parser() {
-    return { parse };
-}

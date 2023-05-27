@@ -1,7 +1,7 @@
 #root {
-  max-width: 1280px;
+  width: 100%;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0 2rem;
 }
 
 .notes {
@@ -10,7 +10,8 @@
 
 .b2b {
   font-style: italic;
-  color: #888;
+  color: hsl(180, 20%, 60%);
+  display: block;
 }
 
 .cal {
@@ -22,7 +23,7 @@
   z-index: 10;
   display: flex;
   grid-column: 1;
-  grid-row: auto /span 4;
+  grid-row: auto / span 4;
   border-top: solid 1px hsl(0, 0%, 40%);
 }
 
@@ -46,11 +47,12 @@
 .time {
   grid-row-end: span 2;
   padding: 0 0.5em;
-  
+
   font-size: 0.6rem;
   font-weight: 600;
   vertical-align: middle;
   line-height: 1rem;
+  color: hsl(0, 0%, 60%);
 }
 
 .set {
@@ -60,12 +62,33 @@
   z-index: 50;
   grid-column: 1;
   background-color: hsl(180, 20%, 30%);
+  transition: background-color 0.2s ease-in-out;
 
   vertical-align: middle;
   text-align: center;
 
+  display: flex;
+  place-content: center;
+  place-items: center;
+  line-height: 110%;
+}
+
+.set:hover {
+  cursor: pointer;
+  background-color: hsl(180, 20%, 40%);
 }
 
 .set.adjacent {
   border-top: solid 1px hsl(180, 20%, 60%);
+}
+
+.stage h3 {
+  grid-row: 1 / span 4;
+  grid-column: 1;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  display: block;
+
+  margin: 0 0.5rem;
 }

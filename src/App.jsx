@@ -1,4 +1,5 @@
-import './App.css'
+import "./App.css";
+import { parse } from "./Parser";
 
 // Markdown string
 const schedule = `
@@ -64,199 +65,116 @@ Havana Beach Club
 ...
 `;
 
-// Regular expression patterns
-const dayPattern = /^#\s+(.*)/;
-const stagePatten = /^##\s+(.*)/;
-const setPattern = /^- (\d{2}:\d{2})-(\d{2}:\d{2}) (.*)$/;
-
-// parse the day, stage and sets from the markdown string
-const parseSchedule = (schedule) => {
-  const lines = schedule.split('\n');
-  const days = [];
-  let day = null;
-  let date = null;
-  let stage = null;
-
-  for (const line of lines) {
-    console.log(line);
-
-    const dayMatch = line.match(dayPattern);
-    if (dayMatch) {
-      date = new Date(dayMatch[1]);
-      day = {
-        name: dayMatch[1],
-        date: date,
-        stages: [],
-      };
-
-      console.log(day);
-      days.push(day);
-      continue;
-    }
-
-    const stageMatch = line.match(stagePatten);
-    if (stageMatch) {
-      if (stage !== null) {
-        stage.opens = stage.sets[0].start;
-        stage.closes = stage.sets[stage.sets.length - 1].end;
-      }
-
-      stage = {
-        name: stageMatch[1],
-        sets: [],
-      };
-
-      day.stages.push(stage);
-      continue;
-    }
-
-    const setMatch = line.match(setPattern);
-    if (setMatch) {
-
-      // compute the number of hours between the start time and the end time
-      const start = setMatch[1].split(':');
-      const end = setMatch[2].split(':');
-      let hours = parseInt(end[0]) - parseInt(start[0]);
-      const minutes = parseInt(end[1]) - parseInt(start[1]);
-
-      // handle sets that end after midnight (e.g. 23:00-01:00
-      if (hours < 0) { 
-        hours += 24; 
-        let tomorrow = new Date(date);
-        tomorrow.setDate(date.getDate() + 1);
-
-        date = tomorrow;
-      }
-
-      const duration = hours + minutes / 60;
-      const startTime = new Date(date);
-      startTime.setHours(hours);
-      startTime.setMinutes(minutes);
-
-      const set = {
-        start: setMatch[1],
-        startTime: startTime,
-        end: setMatch[2],
-        performance: setMatch[3],
-        duration: duration
-      };
-      stage.sets.push(set);
-      continue;
-    }
-  }
-
-  console.log(days);
-  return days;
-};
-
-
-function Stage({ stage }) {
-  // get the time the stage opens and closes
-  const start = stage.sets[0].start;
-  const end = stage.sets[stage.sets.length - 1].end;
-
+function Stage(stage, day) {
+  console.log(stage.id);
   return (
-    <><h2>{stage.name} ({stage.opens} - {stage.closes})</h2>
-      <ul>
-        {stage.sets.map(set => (
-          <li>{set.start} - {set.end} <Performance performance={set.performance} /> ({set.duration} hrs) [{set.startTime.toLocaleString()}]</li>
-        ))}
-      </ul></>
+    <div key={stage.id} className="stage" data-id={stage.id}>
+      {TimeRows(day.opens, day.closes)}
+      <h3>{stage.name}</h3>
+      {stage.sets.map((set) => Set(set, stage, day))}
+    </div>
   );
 }
 
-function Performance({ performance }) {
-  let artist = performance;
-  let notes = null;
+function Set(set, stage, day) {
+  let duration = (set.endTime - set.startTime) / 1000 / 60 / 60;
+  let start = (set.startTime - day.opens) / 1000 / 60 / 60;
 
-  // if the performance ends with notes, like (Live), then extract them out
-  const match = artist.match(/^(.*)\((.*)\)$/);
-  if (match) {
-    artist = match[1];
-    notes = match[2];
+  return (
+    <div
+      key={start}
+      id={set.id}
+      className={`set ${set.adjacent ? "adjacent" : ""}`}
+      style={{ gridRow: `${5 + start * 4} / span ${duration * 4}` }}
+      onClick={() => console.log(`${day.id}/${stage.id}/${set.id}`)}
+    >
+      <p>{Performance(set.performance)}</p>
+    </div>
+  );
+}
+
+function Performance(performance) {
+  return (
+    <>
+      {performance.artist}
+      {performance.b2b ? (
+        <>
+          <span className="b2b"> b2b </span>
+          {performance.b2b}
+        </>
+      ) : null}
+      {performance.notes ? (
+        <span className="notes">({performance.notes})</span>
+      ) : null}
+    </>
+  );
+}
+
+function TimeScale(start, end) {
+  let hour = start.getHours();
+  let duration = (end - start) / 1000 / 60 / 60;
+
+  const content = [];
+  for (let i = 0; i <= duration; i++) {
+    const rowStart = 4 * (i + 1);
+    content.push(
+      <div className="time" style={{ gridRowStart: rowStart }}>
+        {hour < 10 ? "0" : null}
+        {hour}:00
+      </div>
+    );
+
+    hour = (hour + 1) % 24;
   }
 
-  // if the performance is b2b, like 'Jody Wisternoff b2b Simon Doty', then split out the artists
-  const artists = artist.split(' b2b ');
-  if (artists.length > 1) {
-    return <> {artists[0]} <span className="b2b">b2b</span> {artists[1]} {notes ? (<span className="notes">({notes})</span>) : null}</>
-  } else {
-    return <>{artist} {notes ? (<span className="notes">({notes})</span>) : null}</>
+  return content;
+}
+
+function TimeRows(start, end) {
+  let hour = start.getHours();
+  let duration = (end - start) / 1000 / 60 / 60;
+
+  const content = [];
+  for (let i = 0; i < duration + 2; i++) {
+    const rowStart = 4 * i + 1;
+    content.push(
+      <div className="hour" style={{ gridRowStart: rowStart }}></div>
+    );
+
+    hour = (hour + 1) % 24;
   }
+
+  return content;
 }
 
 function Day({ day }) {
   return (
+    <section key={day.id} data-id={day.id}>
+      <h2>{day.name}</h2>
+      <p>
+        Opens: {day.opens.toLocaleString()}, Closes:{" "}
+        {day.closes.toLocaleString()}
+      </p>
+
+      <div className="cal">
+        <div className="times">{TimeScale(day.opens, day.closes)}</div>
+        {day.stages.map((stage) => Stage(stage, day))}
+      </div>
+    </section>
+  );
+}
+
+function App() {
+  const timetable = parse(schedule);
+
+  return (
     <>
-      <h1>{day.name}</h1>
-      <p>{new Date(day.name).toDateString()}</p>
-      {day.stages.map(stage => (
-        <Stage stage={stage} />
+      <h1>Explorations 2023</h1>
+      {timetable.map((day) => (
+        <Day day={day} />
       ))}
     </>
   );
 }
 
-
-function App() {
-  const timetable = parseSchedule(schedule);
-
-  const startOfDay = 10;
-  const duration = 20;
-
-  function TimeScale(start, length) {
-    const content = [];
-    let hour = start;
-    for (let i = 0; i <= length; i++) {
-      const rowStart = 4 * (i + 1);
-      content.push(<div className="time" style={{ gridRowStart: rowStart }}>{hour}:00</div>);
-
-      hour = (hour + 1) % 24;
-    }
-
-    return content;
-  }
-
-  function TimeRows(start, length) {
-    const content = [];
-    let hour = start;
-    for (let i = 0; i < length + 2; i++) {
-      const rowStart = 4 * (i) + 1;
-      content.push(<div className="hour" style={{ gridRowStart: rowStart }}></div>);
-
-      hour = (hour + 1) % 24;
-    }
-
-    return content;
-  }
-
-  return <>
-    <div className="cal">
-
-      <div className="times">
-        {TimeScale(startOfDay, duration)}
-      </div>
-      <div className="stage">
-        {TimeRows(startOfDay, duration)}
-
-        <div class="set" style={{ gridRow: "3 / span 4" }}>Jimmy Dean</div>
-        <div class="set adjacent" style={{ gridRow: "7 / span 6" }}>Paula Dean</div>
-        <div class="set adjacent" style={{ gridRow: "13 / span 4" }}>Paula Poundstone</div>
-
-        <div class="set" style={{ gridRow: "20 / span 4" }}>Jeff Goldblum</div>
-      </div>
-
-      <div className="stage">
-        {TimeRows(startOfDay, duration)}
-
-        <div class="set" style={{ gridRow: "5 / span 4" }}>Jimmy Dean</div>
-        <div class="set adjacent" style={{ gridRow: "9 / span 6" }}>Paula Dean</div>
-        <div class="set adjacent" style={{ gridRow: "15 / span 4" }}>Paula Poundstone</div>
-        <div class="set adjacent" style={{ gridRow: "19 / span 4" }}>Jeff Goldblum</div>
-      </div>
-    </div>
-    {timetable.map(day => (<Day day={day} />))}
-  </>
-}
-
-export default App
+export default App;
