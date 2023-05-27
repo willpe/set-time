@@ -1,69 +1,7 @@
+import { createContext, useContext, useState } from "react";
 import "./App.css";
-import { parse } from "./Parser";
 
-// Markdown string
-const schedule = `
-# Thursday June 8, 2023
-
-## Splendor
-- 22:00-00:00 Asch Pintura
-- 00:00-02:00 Romain Garcia
-- 02:00-04:00 Jody Wisternoff b2b Simon Doty
-
-## The Cove
-- 21:00-23:00 Mia Aurora
-- 23:00-01:00 Steven Weston (Live)
-- 01:00-04:30 James Shinra
-
-## Yacht Club
-- 20:00-22:00 ixto
-- 22:00-00:00 Bani D
-- 00:00-03:00 VONDA7
-
-# Friday June 9, 2023
-
-## Empire
-- 21:00-23:00 Laura T
-- 23:00-01:00 Rezident
-- 01:00-03:00 CRi (DJ Set)
-- 03:00-06:00 Dusky
-
-## Splendor
-- 21:00-00:30 MOLØ
-- 00:30-05:30 James Grant
-
-## The Cove
-- 12:00-15:00 Dom Donnelly
-- 15:00-18:00 Hosini
-- 18:00-21:00 Cornelius SA
-- 21:00-23:00 Warung
-- 23:00-01:00 Braxton
-- 01:00-03:00 Michael Cassette
-
-## Yacht Club
-- 19:00-21:00 M.O.S
-- 21:00-00:00 Nordfold
-- 00:00-03:00 PROFF
-
-## Gjipe
-- 12:00-15:00 Igor Garanin
-- 15:00-18:30 CRi b2b Yotto
-
-## Poolside Sessions
-Havana Beach Club
-- 15:00-16:30 Romain Garcia
-- 16:30-18:00 Dusky
-- 18:00-19:30 HANA
-
-## Wellness
-Havana Beach Club
-- 10:00-11:00 Beyond Belief Breathwork
-- 11:00-12:00 Afterglow Yoga
-- 12:00-13:00 Hot Minute HiiT
-- 17:00-18:00 Cowboy Capoeira
-- 18:00-19:00 Sun Kissed Yoga + DJ
-...
-`;
+const FestivalContext = createContext(null);
 
 function Stage({ stage, day }) {
   return (
@@ -81,13 +19,18 @@ function Set({ set, stage, day }) {
   let duration = (set.endTime - set.startTime) / 1000 / 60 / 60;
   let start = (set.startTime - day.opens) / 1000 / 60 / 60;
 
+  const festivalContext = useContext(FestivalContext);
+  const isFavorite = festivalContext.isFavorite(day.id, stage.id, set.id);
+
   return (
     <div
       key={start}
       id={set.id}
-      className={`set ${set.adjacent ? "adjacent" : ""}`}
+      className={`set ${set.adjacent ? "adjacent" : ""} ${
+        isFavorite ? "favorite" : ""
+      }`}
       style={{ gridRow: `${5 + start * 4} / span ${duration * 4}` }}
-      onClick={() => console.log(`${day.id}/${stage.id}/${set.id}`)}
+      onClick={() => festivalContext.setFavorite(day.id, stage.id, set.id)}
     >
       <p>{Performance(set.performance)}</p>
     </div>
@@ -156,11 +99,6 @@ function Day({ day }) {
   return (
     <section key={day.id} data-id={day.id}>
       <h2>{day.name}</h2>
-      <p>
-        Opens: {day.opens.toLocaleString()}, Closes:{" "}
-        {day.closes.toLocaleString()}
-      </p>
-
       <div className="cal">
         <div className="times">{TimeScale(day.opens, day.closes)}</div>
         {day.stages.map((stage) => (
@@ -172,13 +110,37 @@ function Day({ day }) {
 }
 
 function Festival({ festival }) {
+  const [favorites, setFavorites] = useState([]);
+  function toggleFavorite(key) {
+    setFavorites((f) => {
+      const index = f.indexOf(key);
+      if (index === -1) {
+        return [...f, key];
+      } else {
+        return f.slice(0, index).concat(f.slice(index + 1));
+      }
+    });
+  }
+
+  const context = {
+    festival: festival,
+    setFavorite: (day, stage, set) => {
+      const key = `${day}/${stage}/${set}`;
+      toggleFavorite(key);
+    },
+    isFavorite: (day, stage, set) => {
+      const key = `${day}/${stage}/${set}`;
+      const isFavorite = favorites.indexOf(key) !== -1;
+      return isFavorite;
+    },
+  };
   return (
-    <>
+    <FestivalContext.Provider value={context}>
       <h1 data-id={festival.id}>Explorations 2023</h1>
       {festival.days.map((day) => (
         <Day key={day.id} day={day} />
       ))}
-    </>
+    </FestivalContext.Provider>
   );
 }
 
