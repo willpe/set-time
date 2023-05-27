@@ -110,15 +110,21 @@ function Day({ day }) {
 }
 
 function Festival({ festival }) {
-  const [favorites, setFavorites] = useState([]);
+  const storedFavorites =
+    localStorage.getItem(`favorites-${festival.id}`)?.split(",") || [];
+  const [favorites, setFavorites] = useState(storedFavorites);
   function toggleFavorite(key) {
     setFavorites((f) => {
       const index = f.indexOf(key);
+      let result = null;
       if (index === -1) {
-        return [...f, key];
+        result = [...f, key];
       } else {
-        return f.slice(0, index).concat(f.slice(index + 1));
+        result = f.slice(0, index).concat(f.slice(index + 1));
       }
+
+      localStorage.setItem(`favorites-${festival.id}`, result.join(","));
+      return result;
     });
   }
 

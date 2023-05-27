@@ -102,7 +102,7 @@ Havana Beach Club
 ## Gjipe
 
 - 12:00-15:00 Nicky Elisabeth
-- 15:00-18:30 Marsg b2b Simon Doty
+- 15:00-18:30 Marsh b2b Simon Doty
 
 ## Poolside Sessions
 
