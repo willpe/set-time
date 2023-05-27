@@ -1,0 +1,138 @@
+image: docker:latest
+
+variables:
+  # See: https://docs.gitlab.com/ee/user/clusters/agent/ci_cd_workflow.html#update-your-gitlab-ciyml-file-to-run-kubectl-commands
+  KUBE_CONFIG_CONTEXT: "set-time/gitlab-agent:gitlab-runner"
+  KUBE_NAMESPACE: $CI_PROJECT_NAMESPACE
+  KUBE_NAME: $CI_PROJECT_NAME
+  KUBE_DEPLOYMENT_MANIFEST: "manifests/deployment.yaml"
+  URL: "https://setti.me"
+
+stages:
+  - build
+  - push
+  - deploy
+  - release
+
+Build:
+  stage: build
+  tags:
+    - docker
+  before_script:
+    # docker login asks for the password to be passed through stdin for security
+    # we use $CI_REGISTRY_PASSWORD here which is a special variable provided by GitLab
+    # https://docs.gitlab.com/ce/ci/variables/predefined_variables.html
+    - echo -n $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+  script:
+    # fetches the latest image (not failing if image is not found)
+    - docker pull $CI_REGISTRY_IMAGE:latest || true
+    # builds the project, passing proxy variables, using OCI labels
+    # notice the cache-from, which is going to use the image we just pulled locally
+    # the built image is tagged locally with the commit SHA, and then pushed to 
+    # the GitLab registry
+    - >
+      docker build
+      --pull
+      --cache-from $CI_REGISTRY_IMAGE:latest
+      --label "org.opencontainers.image.title=$CI_PROJECT_TITLE"
+      --label "org.opencontainers.image.url=$CI_PROJECT_URL"
+      --label "org.opencontainers.image.created=$CI_JOB_STARTED_AT"
+      --label "org.opencontainers.image.revision=$CI_COMMIT_SHORT_SHA"
+      --label "org.opencontainers.image.version=$CI_COMMIT_REF_NAME"
+      --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
+      .
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
+
+# Here, the goal is to tag the "main" branch as "latest"
+Push latest:
+  variables:
+    # We are just playing with Docker here. 
+    # We do not need GitLab to clone the source code.
+    GIT_STRATEGY: none
+  stage: push
+  tags:
+    - docker
+  only:
+    # Only "master" should be tagged "latest"
+    - main
+  before_script:
+    # docker login asks for the password to be passed through stdin for security
+    # we use $CI_REGISTRY_PASSWORD here which is a special variable provided by GitLab
+    # https://docs.gitlab.com/ce/ci/variables/predefined_variables.html
+    - echo -n $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+  script:
+    # Because we have no guarantee that this job will be picked up by the same runner 
+    # that built the image in the previous step, we pull it again locally
+    - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
+    # Then we tag it "latest"
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA $CI_REGISTRY_IMAGE:latest
+    # Annnd we push it.
+    - docker push $CI_REGISTRY_IMAGE:latest
+
+# Finally, the goal here is to Docker tag any Git tag
+# GitLab will start a new pipeline everytime a Git tag is created, which is pretty awesome
+Push tag:
+  variables:
+    # Again, we do not need the source code here. Just playing with Docker.
+    GIT_STRATEGY: none
+  stage: push
+  tags:
+    - docker
+  only:
+    # We want this job to be run on tags only.
+    - tags
+  before_script:
+    # docker login asks for the password to be passed through stdin for security
+    # we use $CI_REGISTRY_PASSWORD here which is a special variable provided by GitLab
+    # https://docs.gitlab.com/ce/ci/variables/predefined_variables.html
+    - echo -n $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+  script:
+    - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+
+Deploy latest:
+  stage: deploy
+  only:
+    - main
+  when: manual
+  environment:
+    name: production
+    url: https://setti.me
+  image:
+    name: bitnami/kubectl:latest
+    entrypoint: ['']
+  script:
+    - kubectl config use-context $KUBE_CONFIG_CONTEXT
+    - sed -i 's|'"${CI_REGISTRY_IMAGE}"'|'"${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}"'|g' $KUBE_DEPLOYMENT_MANIFEST
+    - kubectl apply -f manifests --namespace=$NAMESPACE
+
+
+Deploy tag:
+  stage: deploy
+  rules:
+    - if: $CI_COMMIT_TAG 
+  environment:
+    name: production
+    url: https://setti.me
+  image:
+    name: bitnami/kubectl:latest
+    entrypoint: ['']
+  script:
+    - kubectl config use-context $KUBE_CONFIG_CONTEXT
+    - env
+    - sed -i 's|'"${CI_REGISTRY_IMAGE}"'|'"${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG}"'|g' $KUBE_DEPLOYMENT_MANIFEST
+    - kubectl apply -f manifests --namespace=$NAMESPACE
+
+Release:
+  stage: release
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  rules:
+    - if: $CI_COMMIT_TAG 
+  script:
+    - echo "Running release v${CI_COMMIT_TAG}"
+  release:                               # See https://docs.gitlab.com/ee/ci/yaml/#release for available properties
+    tag_name: '$CI_COMMIT_TAG'
+    description: 'Release $CI_COMMIT_TAG'
+
+
