@@ -1,4 +1,5 @@
 import "./App.css";
+import Festival from "./Festival";
 import { parse } from "./Parser";
 
 // Markdown string
@@ -65,115 +66,9 @@ Havana Beach Club
 ...
 `;
 
-function Stage(stage, day) {
-  return (
-    <div key={stage.id} className="stage" data-id={stage.id}>
-      {TimeRows(day.opens, day.closes)}
-      <h3>{stage.name}</h3>
-      {stage.sets.map((set) => Set(set, stage, day))}
-    </div>
-  );
-}
-
-function Set(set, stage, day) {
-  let duration = (set.endTime - set.startTime) / 1000 / 60 / 60;
-  let start = (set.startTime - day.opens) / 1000 / 60 / 60;
-
-  return (
-    <div
-      key={start}
-      id={set.id}
-      className={`set ${set.adjacent ? "adjacent" : ""}`}
-      style={{ gridRow: `${5 + start * 4} / span ${duration * 4}` }}
-      onClick={() => console.log(`${day.id}/${stage.id}/${set.id}`)}
-    >
-      <p>{Performance(set.performance)}</p>
-    </div>
-  );
-}
-
-function Performance(performance) {
-  return (
-    <>
-      {performance.artist}
-      {performance.b2b ? (
-        <>
-          <span className="b2b"> b2b </span>
-          {performance.b2b}
-        </>
-      ) : null}
-      {performance.notes ? (
-        <span className="notes">({performance.notes})</span>
-      ) : null}
-    </>
-  );
-}
-
-function TimeScale(start, end) {
-  let hour = start.getHours();
-  let duration = (end - start) / 1000 / 60 / 60;
-
-  const content = [];
-  for (let i = 0; i <= duration; i++) {
-    const rowStart = 4 * (i + 1);
-    content.push(
-      <div className="time" style={{ gridRowStart: rowStart }}>
-        {hour < 10 ? "0" : null}
-        {hour}:00
-      </div>
-    );
-
-    hour = (hour + 1) % 24;
-  }
-
-  return content;
-}
-
-function TimeRows(start, end) {
-  let hour = start.getHours();
-  let duration = (end - start) / 1000 / 60 / 60;
-
-  const content = [];
-  for (let i = 0; i < duration + 2; i++) {
-    const rowStart = 4 * i + 1;
-    content.push(
-      <div className="hour" style={{ gridRowStart: rowStart }}></div>
-    );
-
-    hour = (hour + 1) % 24;
-  }
-
-  return content;
-}
-
-function Day({ day }) {
-  return (
-    <section key={day.id} data-id={day.id}>
-      <h2>{day.name}</h2>
-      <p>
-        Opens: {day.opens.toLocaleString()}, Closes:{" "}
-        {day.closes.toLocaleString()}
-      </p>
-
-      <div className="cal">
-        <div className="times">{TimeScale(day.opens, day.closes)}</div>
-        {day.stages.map((stage) => Stage(stage, day))}
-      </div>
-    </section>
-  );
-}
-
 function App() {
-  const timetable = parse("Explorations 2023", schedule);
-
-  return (
-    <>
-      <h1 data-id={timetable.id}>Explorations 2023</h1>
-      {timetable.days.map((day) => (
-        <Day day={day} />
-      ))}
-    </>
-  );
+  const festival = parse("Explorations 2023", schedule);
+  return <Festival festival={festival} />;
 }
 
 export default App;
