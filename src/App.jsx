@@ -2,7 +2,7 @@ import './App.css'
 
 // Markdown string
 const schedule = `
-# Thursday
+# Thursday June 8, 2023
 
 ## Splendor
 - 22:00-00:00 Asch Pintura
@@ -19,7 +19,7 @@ const schedule = `
 - 22:00-00:00 Bani D
 - 00:00-03:00 VONDA7
 
-# Friday
+# Friday June 9, 2023
 
 ## Empire
 - 21:00-23:00 Laura T
@@ -74,6 +74,7 @@ const parseSchedule = (schedule) => {
   const lines = schedule.split('\n');
   const days = [];
   let day = null;
+  let date = null;
   let stage = null;
 
   for (const line of lines) {
@@ -81,10 +82,10 @@ const parseSchedule = (schedule) => {
 
     const dayMatch = line.match(dayPattern);
     if (dayMatch) {
-
-      console.log("DAY");
+      date = new Date(dayMatch[1]);
       day = {
         name: dayMatch[1],
+        date: date,
         stages: [],
       };
 
@@ -95,10 +96,16 @@ const parseSchedule = (schedule) => {
 
     const stageMatch = line.match(stagePatten);
     if (stageMatch) {
+      if (stage !== null) {
+        stage.opens = stage.sets[0].start;
+        stage.closes = stage.sets[stage.sets.length - 1].end;
+      }
+
       stage = {
         name: stageMatch[1],
         sets: [],
       };
+
       day.stages.push(stage);
       continue;
     }
@@ -113,11 +120,22 @@ const parseSchedule = (schedule) => {
       const minutes = parseInt(end[1]) - parseInt(start[1]);
 
       // handle sets that end after midnight (e.g. 23:00-01:00
-      if (hours < 0) { hours += 24; }
+      if (hours < 0) { 
+        hours += 24; 
+        let tomorrow = new Date(date);
+        tomorrow.setDate(date.getDate() + 1);
+
+        date = tomorrow;
+      }
+
       const duration = hours + minutes / 60;
+      const startTime = new Date(date);
+      startTime.setHours(hours);
+      startTime.setMinutes(minutes);
 
       const set = {
         start: setMatch[1],
+        startTime: startTime,
         end: setMatch[2],
         performance: setMatch[3],
         duration: duration
@@ -133,11 +151,15 @@ const parseSchedule = (schedule) => {
 
 
 function Stage({ stage }) {
+  // get the time the stage opens and closes
+  const start = stage.sets[0].start;
+  const end = stage.sets[stage.sets.length - 1].end;
+
   return (
-    <><h2>{stage.name}</h2>
+    <><h2>{stage.name} ({stage.opens} - {stage.closes})</h2>
       <ul>
         {stage.sets.map(set => (
-          <li>{set.start} - {set.end} <Performance performance={set.performance} /> ({set.duration} hrs)</li>
+          <li>{set.start} - {set.end} <Performance performance={set.performance} /> ({set.duration} hrs) [{set.startTime.toLocaleString()}]</li>
         ))}
       </ul></>
   );
@@ -167,6 +189,7 @@ function Day({ day }) {
   return (
     <>
       <h1>{day.name}</h1>
+      <p>{new Date(day.name).toDateString()}</p>
       {day.stages.map(stage => (
         <Stage stage={stage} />
       ))}
@@ -178,64 +201,61 @@ function Day({ day }) {
 function App() {
   const timetable = parseSchedule(schedule);
 
+  const startOfDay = 10;
+  const duration = 20;
+
+  function TimeScale(start, length) {
+    const content = [];
+    let hour = start;
+    for (let i = 0; i <= length; i++) {
+      const rowStart = 4 * (i + 1);
+      content.push(<div className="time" style={{ gridRowStart: rowStart }}>{hour}:00</div>);
+
+      hour = (hour + 1) % 24;
+    }
+
+    return content;
+  }
+
+  function TimeRows(start, length) {
+    const content = [];
+    let hour = start;
+    for (let i = 0; i < length + 2; i++) {
+      const rowStart = 4 * (i) + 1;
+      content.push(<div className="hour" style={{ gridRowStart: rowStart }}></div>);
+
+      hour = (hour + 1) % 24;
+    }
+
+    return content;
+  }
+
   return <>
-  <div className="cal">
+    <div className="cal">
 
-        <div className="times">
-            <div class="time" style={{gridRowStart:4}}>10:00</div>
-            <div class="time" style={{gridRowStart:8}}>11:00</div>
-            <div class="time" style={{gridRowStart:12}}>12:00</div>
-            <div class="time" style={{gridRowStart:16}}>13:00</div>
-            <div class="time" style={{gridRowStart:20}}>14:00</div>
-            <div class="time" style={{gridRowStart:24}}>15:00</div>
-            <div class="time" style={{gridRowStart:28}}>16:00</div>
-            <div class="time" style={{gridRowStart:32}}>17:00</div>
-            <div class="time" style={{gridRowStart:36}}>18:00</div>
-            <div class="time" style={{gridRowStart:40}}>19:00</div>
-            <div class="time" style={{gridRowStart:44}}>20:00</div>
-        </div>
-        <div className="stage">
-            <div class="hour" style={{gridRowStart:1}}></div>
-            <div class="hour" style={{gridRowStart:5}}></div>
-            <div class="hour" style={{gridRowStart:9}}></div>
-            <div class="hour" style={{gridRowStart:13}}></div>
-            <div class="hour" style={{gridRowStart:17}}></div>
-            <div class="hour" style={{gridRowStart:21}}></div>
-            <div class="hour" style={{gridRowStart:25}}></div>
-            <div class="hour" style={{gridRowStart:29}}></div>
-            <div class="hour" style={{gridRowStart:33}}></div>
-            <div class="hour" style={{gridRowStart:37}}></div>
-            <div class="hour" style={{gridRowStart:41}}></div>
-            <div class="hour" style={{gridRowStart:45}}></div>
+      <div className="times">
+        {TimeScale(startOfDay, duration)}
+      </div>
+      <div className="stage">
+        {TimeRows(startOfDay, duration)}
 
-            <div class="set" style={{gridRow :"3 / span 4"}}>Jimmy Dean</div>
-            <div class="set adjacent" style={{gridRow :"7 / span 6"}}>Paula Dean</div>
-            <div class="set adjacent" style={{gridRow :"13 / span 3"}}>Paula Poundstone</div>
+        <div class="set" style={{ gridRow: "3 / span 4" }}>Jimmy Dean</div>
+        <div class="set adjacent" style={{ gridRow: "7 / span 6" }}>Paula Dean</div>
+        <div class="set adjacent" style={{ gridRow: "13 / span 4" }}>Paula Poundstone</div>
 
-            <div class="set" style={{gridRow :"20 / span 4"}}>Jeff Goldblum</div>
-          </div>
+        <div class="set" style={{ gridRow: "20 / span 4" }}>Jeff Goldblum</div>
+      </div>
 
-          <div className="stage">
-            <div class="hour" style={{gridRowStart:1}}></div>
-            <div class="hour" style={{gridRowStart:5}}></div>
-            <div class="hour" style={{gridRowStart:9}}></div>
-            <div class="hour" style={{gridRowStart:13}}></div>
-            <div class="hour" style={{gridRowStart:17}}></div>
-            <div class="hour" style={{gridRowStart:21}}></div>
-            <div class="hour" style={{gridRowStart:25}}></div>
-            <div class="hour" style={{gridRowStart:29}}></div>
-            <div class="hour" style={{gridRowStart:33}}></div>
-            <div class="hour" style={{gridRowStart:37}}></div>
-            <div class="hour" style={{gridRowStart:41}}></div>
-            <div class="hour" style={{gridRowStart:45}}></div>
+      <div className="stage">
+        {TimeRows(startOfDay, duration)}
 
-            <div class="set" style={{gridRow :"5 / span 4"}}>Jimmy Dean</div>
-            <div class="set adjacent" style={{gridRow :"9 / span 6"}}>Paula Dean</div>
-            <div class="set adjacent" style={{gridRow :"15 / span 4"}}>Paula Poundstone</div>
-            <div class="set adjacent" style={{gridRow :"19 / span 4"}}>Jeff Goldblum</div>
-          </div>
-     </div>
-      {timetable.map(day => (<Day day={day} />))}
+        <div class="set" style={{ gridRow: "5 / span 4" }}>Jimmy Dean</div>
+        <div class="set adjacent" style={{ gridRow: "9 / span 6" }}>Paula Dean</div>
+        <div class="set adjacent" style={{ gridRow: "15 / span 4" }}>Paula Poundstone</div>
+        <div class="set adjacent" style={{ gridRow: "19 / span 4" }}>Jeff Goldblum</div>
+      </div>
+    </div>
+    {timetable.map(day => (<Day day={day} />))}
   </>
 }
 
