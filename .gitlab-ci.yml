@@ -6,6 +6,7 @@ variables:
   KUBE_NAMESPACE: $CI_PROJECT_NAMESPACE
   KUBE_NAME: $CI_PROJECT_NAME
   KUBE_DEPLOYMENT_MANIFEST: "manifests/deployment.yaml"
+  NAMESPACE: "set-time"
   URL: "https://setti.me"
 
 stages:
