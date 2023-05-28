@@ -2,7 +2,7 @@ image: docker:latest
 
 variables:
   # See: https://docs.gitlab.com/ee/user/clusters/agent/ci_cd_workflow.html#update-your-gitlab-ciyml-file-to-run-kubectl-commands
-  KUBE_CONFIG_CONTEXT: "will/set-time:gitlab-agent"
+  KUBE_CONFIG_CONTEXT: "will/set-time:settime-agent"
   KUBE_NAMESPACE: $CI_PROJECT_NAMESPACE
   KUBE_NAME: $CI_PROJECT_NAME
   KUBE_DEPLOYMENT_MANIFEST: "manifests/deployment.yaml"
