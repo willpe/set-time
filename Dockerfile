@@ -1,10 +1,10 @@
 FROM node:18-alpine AS build
 WORKDIR /app
-COPY app/package.json .
-COPY app/package-lock.json .
+COPY package.json .
+COPY package-lock.json .
 RUN npm install
 
-COPY app/ .
+COPY ./ .
 ENV VITE_API_BASE_URL="https://api.setti.me"
 RUN npm run build
 
