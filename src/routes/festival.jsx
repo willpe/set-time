@@ -1,5 +1,4 @@
 import { createContext, useContext, useState } from "react";
-import "./festival.css";
 
 import Day from "../components/timeline/Day";
 import { parse } from "../Parser";

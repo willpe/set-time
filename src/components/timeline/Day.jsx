@@ -1,4 +1,4 @@
-import styles from "./Day.module.css";
+import Set from "./Set";
 
 function TimeScale({ start, end }) {
   let hour = start.getHours();
@@ -24,7 +24,7 @@ function TimeScale({ start, end }) {
 
   return (
     <div
-      className={styles.times}
+      className="times"
       data-range={`from ${start.getHours()} to ${
         (start.getHours() + duration) % 24
       } (${duration} hrs)`}
@@ -54,7 +54,7 @@ function GridLines({ start, end }) {
 
   return (
     <div
-      className={styles.gridlines}
+      className="gridlines"
       data-range={`from ${start.getHours()} to ${
         (start.getHours() + duration) % 24
       } (${duration} hrs)`}
@@ -68,25 +68,29 @@ export default function Day({ day }) {
   return (
     <section key={day.id} data-id={day.id}>
       <h2>{day.name}</h2>
-      <div className={styles.timeline}>
+      <div className="timeline">
         <TimeScale start={day.opens} end={day.closes} />
 
-        <div className={styles.stgs}>
+        <div className="grid">
           <GridLines start={day.opens} end={day.closes} />
+          <div className="stages">
+            {day.stages.map((stage) => (
+              <div key={stage.id} className="stage" data-id={stage.id}>
+                <h3>{stage.name}</h3>
+                {stage.sets.map((set) => (
+                  <Set key={set.id} set={set} stage={stage} day={day} />
+                ))}
+              </div>
 
-          <div className={styles.stgwrp}>
-            <div className={styles.stg}>
-              <div className={styles.st}></div>
-            </div>
-            <div className={styles.stg}>
-              <div className={styles.st}></div>
-            </div>
-            <div className={styles.stg}>
-              <div className={styles.st}></div>
-            </div>
-            <div className={styles.stg}>
-              <div className={styles.st}></div>
-            </div>
+              // <div key={stage.id} className="stage">
+              //   <div
+              //     className="set"
+              //     style={{ gridRow: `${5 + 1 * 4} / span ${1 * 4}` }}
+              //   >
+              //     Set Name
+              //   </div>
+              // </div>
+            ))}
           </div>
         </div>
       </div>

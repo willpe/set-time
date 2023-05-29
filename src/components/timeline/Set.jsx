@@ -1,3 +1,6 @@
+import { useContext } from "react";
+import { FestivalContext } from "../../routes/festival";
+
 function Performance(performance) {
   return (
     <>
@@ -15,7 +18,7 @@ function Performance(performance) {
   );
 }
 
-function Set({ set, stage, day }) {
+export default function Set({ set, stage, day }) {
   let duration = (set.endTime - set.startTime) / 1000 / 60 / 60;
   let start = (set.startTime - day.opens) / 1000 / 60 / 60;
 

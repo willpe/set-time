@@ -1,0 +1,121 @@
+.timeline {
+  display: flex;
+  flex-direction: row;
+
+  .times {
+    --row-height: 0.5rem;
+    --text-color-alt: hsl(0, 0%, 60%);
+
+    display: grid;
+    grid-auto-rows: var(--row-height);
+
+    div {
+      grid-row-end: span 2;
+      padding: 0 0.5em;
+
+      font-size: calc(1.3 * var(--row-height));
+      font-weight: 600;
+      vertical-align: middle;
+      line-height: 1rem;
+      color: var(--text-color-alt);
+    }
+  }
+
+  .grid {
+    flex-grow: 1;
+    display: flex;
+    position: relative;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+
+    .gridlines {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+
+      z-index: 10;
+      display: grid;
+      grid-auto-rows: 0.5rem;
+
+      div {
+        display: flex;
+        grid-column: 1;
+        grid-row: auto / span 4;
+        border-top: solid 1px hsl(0, 0%, 40%);
+        &:first-child {
+          border-top: none;
+        }
+      }
+    }
+
+    .stages {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+
+      z-index: 20;
+      display: flex;
+      justify-content: center;
+    }
+
+    .stage {
+      width: calc(100cqw - 5rem);
+      margin: 0 0.5rem;
+
+      scroll-behavior: smooth;
+      scroll-snap-align: start;
+      scroll-margin-left: 0.5rem;
+
+      display: grid;
+      grid-auto-rows: 0.5rem;
+
+      /* background-color: hsl(0, 0%, 16%); */
+
+      .set {
+        margin: 0;
+        padding: 0.25rem;
+        font-size: 0.8rem;
+        z-index: 50;
+        grid-column: 1;
+        background-color: hsl(180, 20%, 30%);
+        transition: background-color 0.2s ease-in-out;
+
+        vertical-align: middle;
+        text-align: center;
+
+        display: flex;
+        place-content: center;
+        place-items: center;
+        line-height: 110%;
+
+        &:hover {
+          cursor: pointer;
+          background-color: hsl(180, 20%, 40%);
+        }
+
+        &.adjacent {
+          border-top: solid 1px hsl(180, 20%, 60%);
+        }
+
+        &.favorite {
+          background-color: hsl(180, 45%, 40%);
+          font-weight: 700;
+        }
+      }
+
+      h3 {
+        grid-row: 1 / span 4;
+        grid-column: 1;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        display: block;
+
+        margin: 0 0.5rem;
+      }
+    }
+  }
+}
