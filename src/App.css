@@ -15,7 +15,7 @@
 
     div {
       grid-row-end: span 2;
-      padding: 0 var(--row-height);
+      padding: 0 0;
 
       font-size: calc(1.3 * var(--row-height));
       font-weight: 600;
@@ -42,6 +42,11 @@
       z-index: 20;
       display: flex;
       justify-content: center;
+
+      @media (min-width: 700px) {
+        position: relative;
+        width: 100%;
+      }
     }
 
     .stage {
