@@ -31,29 +31,7 @@
     position: relative;
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
-    background-color: var(--bg-color-alt);
-
-    .gridlines {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-
-      z-index: 10;
-      display: grid;
-      grid-auto-rows: var(--row-height);
-
-      div {
-        display: flex;
-        grid-column: 1;
-        grid-row: auto / span 4;
-        border-top: solid 1px hsl(0, 0%, 40%);
-        &:first-child {
-          border-top: none;
-        }
-      }
-    }
+    //background-color: var(--bg-color-alt);
 
     .stages {
       position: absolute;
@@ -76,6 +54,28 @@
 
       display: grid;
       grid-auto-rows: var(--row-height);
+
+      .gridlines {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+
+        z-index: 10;
+        display: grid;
+        grid-auto-rows: var(--row-height);
+
+        div {
+          display: flex;
+          grid-column: 1;
+          grid-row: auto / span 4;
+          border-top: solid 1px hsl(0, 0%, 40%);
+          &:first-child {
+            border-top: none;
+          }
+        }
+      }
 
       .set {
         margin: 0;

@@ -72,24 +72,15 @@ export default function Day({ day }) {
         <TimeScale start={day.opens} end={day.closes} />
 
         <div className="grid">
-          <GridLines start={day.opens} end={day.closes} />
           <div className="stages">
             {day.stages.map((stage) => (
               <div key={stage.id} className="stage" data-id={stage.id}>
+                <GridLines start={day.opens} end={day.closes} />
                 <h3>{stage.name}</h3>
                 {stage.sets.map((set) => (
                   <Set key={set.id} set={set} stage={stage} day={day} />
                 ))}
               </div>
-
-              // <div key={stage.id} className="stage">
-              //   <div
-              //     className="set"
-              //     style={{ gridRow: `${5 + 1 * 4} / span ${1 * 4}` }}
-              //   >
-              //     Set Name
-              //   </div>
-              // </div>
             ))}
           </div>
         </div>
