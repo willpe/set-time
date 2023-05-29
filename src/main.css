@@ -141,6 +141,17 @@ nav.festival-list {
           background-color: var(--brand-color);
           font-weight: 700;
         }
+
+        .notes {
+          display: block;
+          color: var(--brand-color-lighter);
+        }
+
+        .b2b {
+          font-style: italic;
+          color: var(--brand-color-lighter);
+          display: block;
+        }
       }
 
       h3 {
