@@ -1,0 +1,11 @@
+{
+  "name": "Group Therapy Weekender",
+  "startDate": "July 21, 2023",
+  "endDate": "June 23, 2023",
+  "location": {
+    "name": "The Gorge Amphitheatre",
+    "address": "George, WA"
+  },
+  "website": "https://www.aboveandbeyond.nu/gtw/",
+  "tickets": "https://www.electricforest.com/pass-types/"
+}
