@@ -26,6 +26,7 @@
   }
 
   .grid {
+    background-color: var(--bg-color-alt);
     flex-grow: 1;
     display: flex;
     position: relative;
