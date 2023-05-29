@@ -42,7 +42,7 @@ header {
     }
   }
 
-  @media (min-height: 600px) {
+  @media (min-width: 700px) and (min-height: 600px) {
     margin-block: 2rem;
   }
 }
