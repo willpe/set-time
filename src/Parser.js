@@ -1,5 +1,3 @@
-import "./App.css";
-
 const shortTimeStyle = { hourCycle: "h24", timeStyle: "short" };
 
 function parseDay(line) {

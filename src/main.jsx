@@ -1,16 +1,26 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
 import ErrorPage from "./ErrorPage.jsx";
 import "./index.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Root from "./routes/root.jsx";
+import Festival, { loader as festivalLoader } from "./routes/festival.jsx";
+import Index, { loader as indexLoader } from "./routes/index.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <Root />,
     errorElement: <ErrorPage />,
+    children: [
+      { index: true, element: <Index />, loader: indexLoader },
+      {
+        path: "festivals/:festivalId",
+        element: <Festival />,
+        loader: festivalLoader,
+      },
+    ],
   },
 ]);
 

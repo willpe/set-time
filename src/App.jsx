@@ -4,8 +4,9 @@ import { parse } from "./Parser";
 import Festival from "./Festival";
 
 import "./App.css";
+import { Outlet } from "react-router";
 
-function App() {
+export default function App() {
   const [festival, setFestival] = useState(null);
   useEffect(() => {
     const load = async () => {
@@ -22,8 +23,7 @@ function App() {
   if (!festival) {
     return <div>Loading...</div>;
   } else {
-    return <Festival festival={festival} />;
+    return <Outlet />;
+    // return <Festival festival={festival} />;
   }
 }
-
-export default App;

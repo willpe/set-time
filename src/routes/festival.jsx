@@ -1,5 +1,7 @@
 import { createContext, useContext, useState } from "react";
-import "./App.css";
+import "./festival.css";
+import { parse } from "../Parser";
+import { useLoaderData } from "react-router";
 
 const FestivalContext = createContext(null);
 
@@ -109,9 +111,26 @@ function Day({ day }) {
   );
 }
 
-function Festival({ festival }) {
+export async function loader({ params }) {
+  const result = await fetch(`/schedules/${params.festivalId}.md`);
+  if (!result) {
+    throw new Response("", {
+      status: 404,
+      statusText: "Not Found",
+    });
+  }
+
+  const text = await result.text();
+
+  let festival = parse("Explorations 2023", text);
+  return { festival };
+}
+
+export default function Festival() {
+  const { festival } = useLoaderData();
   const storedFavorites =
     localStorage.getItem(`favorites-${festival.id}`)?.split(",") || [];
+
   const [favorites, setFavorites] = useState(storedFavorites);
   function toggleFavorite(key) {
     setFavorites((f) => {
@@ -149,5 +168,3 @@ function Festival({ festival }) {
     </FestivalContext.Provider>
   );
 }
-
-export default Festival;
