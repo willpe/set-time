@@ -1,11 +1,11 @@
 {
-    "name": "Explorations 2023",
-    "startDate": "2023-06-08",
-    "endDate": "2023-06-14",
-    "location": {
-        "name": "Dhermi, Albania",
-        "address": "Dhërmiu Beach, Albania"
-    },
-    "website": "https://anjunadeep.com/us/events/explorations",
-    "tickets": "https://explorations.mainstagetravel.co.uk/"
+  "name": "Anjunadeep Explorations",
+  "startDate": "June 6, 2023",
+  "endDate": "June 14, 2023",
+  "location": {
+    "name": "Dhermi, Albania",
+    "address": "Dhërmiu Beach, Albania"
+  },
+  "website": "https://anjunadeep.com/us/events/explorations",
+  "tickets": "https://explorations.mainstagetravel.co.uk/"
 }

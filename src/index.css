@@ -83,6 +83,10 @@ h3 {
   font-weight: 600;
 }
 
+.text-alt {
+  color: var(--text-color-alt);
+}
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;

@@ -2,12 +2,14 @@ import { useState } from "react";
 import { useLoaderData } from "react-router";
 
 import { parse } from "../Parser";
+import { Outlet } from "react-router-dom";
 
-import Schedule from "../components/timeline/Schedule";
 import { FestivalContext } from "../contexts/FestivalContext";
 
+import Schedule from "../components/timeline/Schedule";
+
 export async function loader({ params }) {
-  const result = await fetch(`/schedules/${params.festivalId}.md`);
+  const result = await fetch(`/schedules/${params.festivalId}/festival.json`);
   if (!result) {
     throw new Response("", {
       status: 404,
@@ -15,9 +17,7 @@ export async function loader({ params }) {
     });
   }
 
-  const text = await result.text();
-
-  let festival = parse("Anjunadeep Explorations", text);
+  const festival = await result.json();
   return { festival };
 }
 
@@ -58,18 +58,17 @@ export default function Festival() {
     <FestivalContext.Provider value={context}>
       <>
         <section>
-          <h1 data-id={festival.id}>{festival.name}</h1>
-          <p>
-            {festival.opens.toLocaleDateString(navigator.language, {
-              dateStyle: "medium",
-            })}{" "}
-            -
-            {festival.closes.toLocaleDateString(navigator.language, {
-              dateStyle: "medium",
-            })}
-          </p>
+          <header>
+            <h1 data-id={festival.id}>{festival.name}</h1>
+            <aside>
+              <p>{festival.location.name}</p>
+              <p className="text-alt">
+                {festival.startDate} - {festival.endDate}
+              </p>
+            </aside>
+          </header>
         </section>
-        <Schedule festival={festival} />
+        <Outlet />
       </>
     </FestivalContext.Provider>
   );

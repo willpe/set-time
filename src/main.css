@@ -10,6 +10,43 @@ section {
   margin-inline: 0.5rem;
 }
 
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 1rem;
+
+  h1 {
+    flex-grow: 1;
+  }
+
+  aside {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    p {
+      margin: 0;
+    }
+  }
+
+  @media (min-width: 700px) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    aside {
+      text-align: right;
+      p {
+        margin: 0;
+      }
+    }
+  }
+
+  @media (min-height: 600px) {
+    margin-block: 2rem;
+  }
+}
+
 section.day {
   margin-inline: 0;
 
