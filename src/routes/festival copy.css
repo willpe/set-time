@@ -1,41 +1,25 @@
 #root {
-  /* max-width: 1280px; */
+  max-width: 1280px;
   width: 100%;
   margin: 0 auto;
   padding: 0;
 }
 
-/* .notes {
+.notes {
   font-style: italic;
 }
 
 .b2b {
   font-style: italic;
   color: hsl(180, 20%, 60%);
-  display: block; */
-/* } */
+  display: block;
+}
 
-.timeline {
+.cal {
   display: flex;
   flex-direction: row;
 }
 
-.times {
-  display: grid;
-  grid-auto-rows: 0.5rem;
-}
-
-.times div {
-  grid-row-end: span 2;
-  padding: 0 0.5em;
-
-  font-size: 0.6rem;
-  font-weight: 600;
-  vertical-align: middle;
-  line-height: 1rem;
-  color: hsl(0, 0%, 60%);
-}
-/* 
 .cal .hour {
   z-index: 10;
   display: flex;
@@ -56,7 +40,21 @@
   background-color: hsl(0, 0%, 16%);
 }
 
+.times {
+  display: grid;
+  grid-auto-rows: 0.5rem;
+}
 
+.time {
+  grid-row-end: span 2;
+  padding: 0 0.5em;
+
+  font-size: 0.6rem;
+  font-weight: 600;
+  vertical-align: middle;
+  line-height: 1rem;
+  color: hsl(0, 0%, 60%);
+}
 
 .set {
   margin: 0 0.5rem;
@@ -99,4 +97,4 @@
 .set.favorite {
   background-color: hsl(180, 45%, 40%);
   font-weight: 700;
-} */
+}
