@@ -1,3 +1,11 @@
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
 section {
   margin-inline: 0.5rem;
 }
@@ -9,6 +17,19 @@ section.day {
     margin-inline: 0.5rem;
   }
 }
+
+nav.festival-list {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  a {
+    font-size: 3rem;
+  }
+}
+
 .timeline {
   display: flex;
   flex-direction: row;
@@ -96,7 +117,7 @@ section.day {
         font-size: calc(1.6 * var(--row-height));
         z-index: 50;
         grid-column: 1;
-        background-color: hsl(180, 20%, 30%);
+        background-color: var(--brand-bg-color);
         transition: background-color 0.2s ease-in-out;
 
         vertical-align: middle;
@@ -109,15 +130,15 @@ section.day {
 
         &:hover {
           cursor: pointer;
-          background-color: hsl(180, 20%, 40%);
+          background-color: var(--brand-bg-color-alt);
         }
 
         &.adjacent {
-          border-top: solid 1px hsl(180, 20%, 60%);
+          border-top: solid 1px var(--brand-color-lighter);
         }
 
         &.favorite {
-          background-color: hsl(180, 45%, 40%);
+          background-color: var(--brand-color);
           font-weight: 700;
         }
       }

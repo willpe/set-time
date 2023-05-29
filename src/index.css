@@ -33,6 +33,11 @@
     sans-serif;
   --font-family-bold: "Brown", Inter system-ui, Avenir, Helvetica, Arial,
     sans-serif;
+
+  --brand-bg-color: hsl(180, 20%, 30%);
+  --brand-bg-color-alt: hsl(180, 20%, 40%);
+  --brand-color-lighter: hsl(180, 20%, 60%);
+  --brand-color: hsl(180, 45%, 40%);
 }
 
 #root {
@@ -44,11 +49,11 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--brand-color);
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: var(--brand-color-lighter);
 }
 
 body {

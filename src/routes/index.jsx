@@ -10,10 +10,13 @@ export default function Index() {
   const { festivals } = useLoaderData();
 
   return (
-    <p id="zero-state">
-      {festivals.map((festival) => (
-        <Link to={`/festivals/${festival.id}`}>{festival.name}</Link>
-      ))}
-    </p>
+    <main>
+      <h1>setti.me</h1>
+      <nav className="festival-list">
+        {festivals.map((festival) => (
+          <Link to={`/festivals/${festival.id}`}>{festival.name}</Link>
+        ))}
+      </nav>
+    </main>
   );
 }
