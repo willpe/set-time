@@ -1,4 +1,8 @@
 .timeline {
+  --row-height: 0.5rem;
+  --text-color-alt: hsl(0, 0%, 60%);
+  --bg-color-alt: hsl(0, 0%, 16%);
+
   display: flex;
   flex-direction: row;
 
@@ -11,12 +15,12 @@
 
     div {
       grid-row-end: span 2;
-      padding: 0 0.5em;
+      padding: 0 var(--row-height);
 
       font-size: calc(1.3 * var(--row-height));
       font-weight: 600;
       vertical-align: middle;
-      line-height: 1rem;
+      line-height: calc(2 * var(--row-height));
       color: var(--text-color-alt);
     }
   }
@@ -27,6 +31,7 @@
     position: relative;
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
+    background-color: var(--bg-color-alt);
 
     .gridlines {
       position: absolute;
@@ -37,7 +42,7 @@
 
       z-index: 10;
       display: grid;
-      grid-auto-rows: 0.5rem;
+      grid-auto-rows: var(--row-height);
 
       div {
         display: flex;
@@ -62,22 +67,20 @@
     }
 
     .stage {
-      width: calc(100cqw - 5rem);
-      margin: 0 0.5rem;
+      width: calc(100cqw - (10 * var(--row-height)));
+      margin: 0 var(--row-height);
 
       scroll-behavior: smooth;
       scroll-snap-align: start;
-      scroll-margin-left: 0.5rem;
+      scroll-margin-left: var(--row-height);
 
       display: grid;
-      grid-auto-rows: 0.5rem;
-
-      /* background-color: hsl(0, 0%, 16%); */
+      grid-auto-rows: var(--row-height);
 
       .set {
         margin: 0;
-        padding: 0.25rem;
-        font-size: 0.8rem;
+        padding: calc(0.5 * var(--row-height));
+        font-size: calc(1.6 * var(--row-height));
         z-index: 50;
         grid-column: 1;
         background-color: hsl(180, 20%, 30%);
