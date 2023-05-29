@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { FestivalContext } from "../../routes/festival";
+import { FestivalContext } from "../../contexts/FestivalContext";
 
 function Performance(performance) {
   return (

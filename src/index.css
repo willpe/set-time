@@ -1,3 +1,13 @@
+@font-face {
+  font-family: "Brown";
+  src: url("./assets/brown-regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Brown-Light";
+  src: url("./assets/brown-light.woff2") format("woff2");
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -7,11 +17,22 @@
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
 
+  font-family: var(--font-family);
+
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  --row-height: 0.5rem;
+  --text-color-alt: hsl(0, 0%, 60%);
+  --bg-color-alt: hsl(0, 0%, 16%);
+
+  --font-family: "Brown-Light", Inter, system-ui, Avenir, Helvetica, Arial,
+    sans-serif;
+  --font-family-bold: "Brown", Inter system-ui, Avenir, Helvetica, Arial,
+    sans-serif;
 }
 
 #root {
@@ -41,19 +62,18 @@ body {
 h1 {
   font-size: 2.4rem;
   line-height: 1.1;
-  margin-inline: 0.5rem;
+  margin-block: 0.5rem;
 }
 
 h2 {
   font-size: 1.8em;
   line-height: 1.1;
-  margin-inline: 0.5rem;
+  margin-block: 1rem 0.5rem;
 }
 
 h3 {
   font-size: 1em;
   line-height: 0.8;
-  margin-inline: 0.5rem;
   align-self: center;
   font-weight: 600;
 }

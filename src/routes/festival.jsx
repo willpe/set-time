@@ -1,10 +1,10 @@
-import { createContext, useContext, useState } from "react";
-
-import Day from "../components/timeline/Day";
-import { parse } from "../Parser";
+import { useState } from "react";
 import { useLoaderData } from "react-router";
 
-export const FestivalContext = createContext(null);
+import { parse } from "../Parser";
+
+import Schedule from "../components/timeline/Schedule";
+import { FestivalContext } from "../contexts/FestivalContext";
 
 export async function loader({ params }) {
   const result = await fetch(`/schedules/${params.festivalId}.md`);
@@ -17,7 +17,7 @@ export async function loader({ params }) {
 
   const text = await result.text();
 
-  let festival = parse("Explorations 2023", text);
+  let festival = parse("Anjunadeep Explorations", text);
   return { festival };
 }
 
@@ -56,10 +56,21 @@ export default function Festival() {
   };
   return (
     <FestivalContext.Provider value={context}>
-      <h1 data-id={festival.id}>Explorations 2023</h1>
-      {festival.days.map((day) => (
-        <Day key={day.id} day={day} />
-      ))}
+      <>
+        <section>
+          <h1 data-id={festival.id}>{festival.name}</h1>
+          <p>
+            {festival.opens.toLocaleDateString(navigator.language, {
+              dateStyle: "medium",
+            })}{" "}
+            -
+            {festival.closes.toLocaleDateString(navigator.language, {
+              dateStyle: "medium",
+            })}
+          </p>
+        </section>
+        <Schedule festival={festival} />
+      </>
     </FestivalContext.Provider>
   );
 }

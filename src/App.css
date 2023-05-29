@@ -1,8 +1,15 @@
-.timeline {
-  --row-height: 0.5rem;
-  --text-color-alt: hsl(0, 0%, 60%);
-  --bg-color-alt: hsl(0, 0%, 16%);
+section {
+  margin-inline: 0.5rem;
+}
 
+section.day {
+  margin-inline: 0;
+
+  h2 {
+    margin-inline: 0.5rem;
+  }
+}
+.timeline {
   display: flex;
   flex-direction: row;
 

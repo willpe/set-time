@@ -162,6 +162,8 @@ export const parse = (name, schedule) => {
   const festival = {
     id: name.replace(/\W/g, "-").toLowerCase(),
     name: name,
+    opens: null,
+    closes: null,
     days: days,
   };
 
@@ -184,6 +186,9 @@ export const parse = (name, schedule) => {
     d.opens = dayOpens;
     d.closes = dayCloses;
   }
+
+  festival.opens = festival.days[0].opens;
+  festival.closes = festival.days[festival.days.length - 1].closes;
 
   return festival;
 };

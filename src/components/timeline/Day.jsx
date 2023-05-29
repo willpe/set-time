@@ -66,7 +66,7 @@ function GridLines({ start, end }) {
 
 export default function Day({ day }) {
   return (
-    <section key={day.id} data-id={day.id}>
+    <section className="day" key={day.id} data-id={day.id}>
       <h2>{day.name}</h2>
       <div className="timeline">
         <TimeScale start={day.opens} end={day.closes} />
