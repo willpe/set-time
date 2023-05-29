@@ -55,8 +55,8 @@
       margin: 0 var(--row-height);
 
       scroll-behavior: smooth;
-      scroll-snap-align: start;
-      scroll-margin-left: var(--row-height);
+      scroll-snap-align: center;
+      scroll-margin-block: var(--row-height);
 
       display: grid;
       grid-auto-rows: var(--row-height);
