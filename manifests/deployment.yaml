@@ -6,7 +6,7 @@ metadata:
 spec:
   secretName: web--cert
   issuerRef:
-    name: letsencrypt-settime
+    name: letsencrypt
   commonName: 'setti.me'
   dnsNames:
   - setti.me
