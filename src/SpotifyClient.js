@@ -173,9 +173,7 @@ export default function SpotifyClient(setUser) {
       localStorage.removeItem(localStorageKeys.authToken);
       localStorage.removeItem(localStorageKeys.profile);
 
-      // Clear the user context
-      let user = getUser();
-      setUser(user);
+      window.location = window.location.origin + "/";
     },
   };
 }

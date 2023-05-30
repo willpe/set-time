@@ -21,6 +21,9 @@ export default function Root() {
   return (
     <UserContext.Provider value={userContext}>
       <header>
+        <h1>
+          <a href="/"> setti.me </a>
+        </h1>
         <User />
       </header>
       <Outlet />

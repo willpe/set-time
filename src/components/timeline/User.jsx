@@ -7,11 +7,16 @@ export default function User() {
   const user = userContext.user;
 
   if (userContext.isLoggedIn) {
+    if (user.images.length > 0) {
+      user.image = user.images[0].url;
+    }
+
     return (
-      <>
-        <a href="/logout">{user.display_name}</a>
-        <button onClick={userContext.logout}>logout</button>
-      </>
+      <div className="user">
+        <a href="/profile">
+          {user.image ? <img src={user.image} /> : user.display_name}
+        </a>
+      </div>
     );
   } else {
     return <button onClick={userContext.login}>Login</button>;

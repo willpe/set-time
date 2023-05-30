@@ -11,6 +11,7 @@ import Index, { loader as indexLoader } from "./routes/index.jsx";
 import Schedule, {
   loader as scheduleLoader,
 } from "./components/timeline/Schedule.jsx";
+import Profile from "./routes/profile.jsx";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
         children: [
           { index: true, element: <Schedule />, loader: scheduleLoader },
         ],
+      },
+      {
+        path: "profile",
+        element: <Profile />,
       },
     ],
   },

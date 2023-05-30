@@ -56,20 +56,18 @@ export default function Festival() {
   };
   return (
     <FestivalContext.Provider value={context}>
-      <>
-        <section>
-          <header>
-            <h1 data-id={festival.id}>{festival.name}</h1>
-            <aside>
-              <p>{festival.location.name}</p>
-              <p className="text-alt">
-                {festival.startDate} - {festival.endDate}
-              </p>
-            </aside>
-          </header>
-        </section>
+      <main>
+        <header>
+          <h1 data-id={festival.id}>{festival.name}</h1>
+          <aside>
+            <p>{festival.location.name}</p>
+            <p className="text-alt">
+              {festival.startDate} - {festival.endDate}
+            </p>
+          </aside>
+        </header>
         <Outlet />
-      </>
+      </main>
     </FestivalContext.Provider>
   );
 }
