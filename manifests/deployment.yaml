@@ -1,10 +1,10 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: set-time-cert
+  name: web-cert
   namespace: set-time
 spec:
-  secretName: set-time-cert
+  secretName: web--cert
   issuerRef:
     name: letsencrypt-settime
   commonName: 'setti.me'
@@ -15,7 +15,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web
+  name: web-deployment
   namespace: set-time
 spec:
   replicas: 2
@@ -32,17 +32,14 @@ spec:
         - name: gitlab-registry-token
       containers:
         - name: set-time
-          image: registry.git.willperry.net/will/set-time
-        # envFrom:
-          # - configMapRef:
-            # name: web-config
+          image: registry.git.willperry.net/set-time/web
           ports:
             - containerPort: 8080
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: set-time-service
+  name: web-service
   namespace: set-time
 spec:
   selector:
@@ -53,7 +50,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: set-time-ingress
+  name: web-ingress
   namespace: set-time
 spec:
   rules:
@@ -62,7 +59,7 @@ spec:
         paths:
           - backend:
               service:
-                name: set-time-service
+                name: web-service
                 port:
                   number: 8080
             path: /
@@ -70,4 +67,4 @@ spec:
   tls:
     - hosts:
         - setti.me
-      secretName: set-time-app-cert
+      secretName: web-cert
