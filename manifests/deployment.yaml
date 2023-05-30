@@ -53,6 +53,7 @@ metadata:
   name: web-ingress
   namespace: set-time
 spec:
+  ingressClassName: traefik-external
   rules:
     - host: setti.me
       http:
