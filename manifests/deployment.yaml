@@ -7,10 +7,10 @@ spec:
   secretName: web--cert
   issuerRef:
     name: letsencrypt
-  commonName: 'setti.me'
+  commonName: "setti.me"
   dnsNames:
-  - setti.me
-  - "*.setti.me"
+    - setti.me
+    - "*.setti.me"
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -32,7 +32,7 @@ spec:
         - name: gitlab-registry-token
       containers:
         - name: set-time
-          image: registry.git.willperry.net/set-time/web
+          image: registry.git.willperry.net/set-time/web:0.1.0
           ports:
             - containerPort: 8080
 ---
