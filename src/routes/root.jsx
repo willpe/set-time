@@ -4,6 +4,8 @@ import SpotifyClient from "../SpotifyClient";
 import { UserContext } from "../contexts/UserContext";
 import User from "../components/timeline/User";
 
+import {ReactComponent as Wordmark} from "../assets/logos/wordmark-logo.svg";
+
 export default function Root() {
   const spotifyClient = new SpotifyClient();
   const currentUser = spotifyClient.getCurrentUser();
@@ -22,7 +24,7 @@ export default function Root() {
     <UserContext.Provider value={userContext}>
       <header>
         <h1>
-          <a href="/"> setti.me </a>
+          <a href="/"> <Wordmark /> </a>
         </h1>
         <User />
       </header>

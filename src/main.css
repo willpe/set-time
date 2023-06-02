@@ -49,6 +49,8 @@ header {
   align-items: center;
   margin-bottom: 1rem;
 
+  background-color: #144A52;
+
   h1 {
     flex-grow: 1;
   }

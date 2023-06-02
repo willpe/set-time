@@ -1,7 +1,7 @@
 {
   "name": "set-time",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.2.2",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -27,6 +27,7 @@
     "postcss-import": "^15.1.0",
     "postcss-mixins": "^9.0.4",
     "postcss-nested": "^6.0.1",
-    "vite": "^4.3.2"
+    "vite": "^4.3.2",
+    "vite-plugin-svgr": "^3.2.0"
   }
 }
