@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'set-time'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_668015BE7F4140AFABDBF27FC4592C3A }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9862FD0127934B7186976E4379398A2C }}
           package: .
