@@ -8,14 +8,59 @@
   src: url("./assets/brown-light.woff2") format("woff2");
 }
 
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --color-mint-20: #e7fef1;
+  --color-mint-40: #baf7d9;
+  --color-mint-60: #93ecc7;
+  --color-mint-80: #6ce0b3;
+  --color-mint-100: #2dd29b;
+
+  --color-teal-20: #4db2b2;
+  --color-teal-30: #3fa3a6;
+  --color-teal-40: #389194;
+  --color-teal-50: #317f81;
+  --color-teal-60: #266c73;
+  --color-teal-70: #205a60;
+  --color-teal-80: #144a52;
+  --color-teal-100: #05272e;
+
+  --color-border-teal-60: #366363;
+
+  --color-bg-primary: #0f2024;
+  --color-bg-secondary: var(--color-teal-100);
+
+  --color-bg-alt: var(--color-teal-20);
+  --color-bg-alt-secondary: var(--color-teal-40);
+
+  --color-text-primary: var(--color-mint-20);
+  --color-text-alt: var(--color-mint-60);
+  --color-text-muted: var(--color-teal-20);
+
+  --color-headings-primary: var(--color-mint-60);
+  --color-headings-secondary: var(--color-teal-20);
+
+  --color-bg-card: linear-gradient(
+    var(--color-teal-60),
+    --var(--color-teal-70)
+  );
+  --color-bg-card-emphasis: linear-gradient(
+    var(--color-teal-50),
+    var(--color-teal-30)
+  );
+
+  --row-height: 0.5rem;
+
+  --font-family: Poppins, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  font-family: var(--font-family);
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
 
   font-family: var(--font-family);
 
@@ -25,14 +70,8 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 
-  --row-height: 0.5rem;
   --text-color-alt: hsl(0, 0%, 60%);
   --bg-color-alt: hsl(0, 0%, 16%);
-
-  --font-family: "Brown-Light", Inter, system-ui, Avenir, Helvetica, Arial,
-    sans-serif;
-  --font-family-bold: "Brown", Inter system-ui, Avenir, Helvetica, Arial,
-    sans-serif;
 
   --brand-bg-color: hsl(180, 20%, 30%);
   --brand-bg-color-alt: hsl(180, 20%, 40%);
@@ -50,11 +89,11 @@
 
 a {
   font-weight: 500;
-  color: var(--brand-color);
+  color: var(--color-mint-100);
   text-decoration: inherit;
 }
 a:hover {
-  color: var(--brand-color-lighter);
+  color: var(--color-mint-60);
 }
 
 body {
@@ -67,14 +106,25 @@ body {
   min-height: 100vh;
 }
 
+h1,
+h2,
+h3,
+h4 {
+  color: var(--color-teal-20);
+}
+
 h1 {
   font-size: 2.4rem;
+  font-weight: 200;
+  color: var(--color-mint-60);
+
   line-height: 1.1;
   margin-block: 0.5rem;
 }
 
 h2 {
   font-size: 1.8em;
+  font-weight: 300;
   line-height: 1.1;
   margin-block: 1rem 0.5rem;
 }
@@ -82,14 +132,20 @@ h2 {
 h3 {
   font-size: 1em;
   line-height: 0.8;
-  align-self: center;
   font-weight: 600;
 }
 
-.text-alt {
-  color: var(--text-color-alt);
+// TODO: Move to a separate file for this component
+.stage h3 {
+  align-self: center;
+  color: var(--color-text-primary);
 }
 
+.text-alt {
+  color: var(--color-text-alt);
+}
+
+// TODO: Style buttons
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -102,7 +158,7 @@ button {
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: var(--color-mint-60);
 }
 button:focus,
 button:focus-visible {
@@ -111,13 +167,13 @@ button:focus-visible {
 
 footer {
   margin-block: 2rem;
-  color: var(--text-color-alt);
+  color: var(--color-text-muted);
   font-size: 0.7rem;
 
   text-align: center;
 }
 
-@media (prefers-color-scheme: light) {
+/* @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
     background-color: #ffffff;
@@ -128,4 +184,4 @@ footer {
   button {
     background-color: #f9f9f9;
   }
-}
+} */
