@@ -41,13 +41,15 @@
   --color-headings-primary: var(--color-mint-60);
   --color-headings-secondary: var(--color-teal-20);
 
-  --color-bg-card: linear-gradient(
-    var(--color-teal-60),
-    --var(--color-teal-70)
-  );
-  --color-bg-card-emphasis: linear-gradient(
+  --card-bg: linear-gradient(var(--color-teal-60), var(--color-teal-70));
+  --card-bg-alt: linear-gradient(var(--color-teal-50), var(--color-teal-60));
+  --card-bg-emphasis: linear-gradient(
     var(--color-teal-50),
     var(--color-teal-30)
+  );
+  --card-bg-emphasis-alt: linear-gradient(
+    var(--color-teal-60),
+    var(--color-teal-40)
   );
 
   --row-height: 0.5rem;

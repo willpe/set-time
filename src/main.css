@@ -19,6 +19,7 @@ main.profile {
     text-align: center;
     margin-bottom: 4rem;
 
+    /* TODO: COLORS */
     img {
       height: 250px;
       width: 250px;
@@ -40,6 +41,7 @@ section {
   margin-inline: 0.5rem;
 }
 
+/* TODO header styling */
 header {
   margin-inline: 0.5rem;
 
@@ -49,7 +51,7 @@ header {
   align-items: center;
   margin-bottom: 1rem;
 
-  background-color: #144A52;
+  background-color: var(--color-teal-80);
 
   h1 {
     flex-grow: 1;
@@ -63,7 +65,7 @@ header {
       height: 2rem;
       width: 2rem;
       border-radius: 2rem;
-      border: solid 2px var(--brand-color);
+      border: solid 2px var(--color-teal-20);
     }
   }
 }
@@ -71,6 +73,7 @@ header {
 main header {
   flex-direction: column;
   align-items: flex-start;
+  background-color: initial;
 
   aside {
     flex-direction: row;
@@ -125,7 +128,6 @@ nav.festival-list {
 
   .times {
     --row-height: 0.5rem;
-    --text-color-alt: hsl(0, 0%, 60%);
 
     display: grid;
     grid-auto-rows: var(--row-height);
@@ -138,12 +140,12 @@ nav.festival-list {
       font-weight: 600;
       vertical-align: middle;
       line-height: calc(2 * var(--row-height));
-      color: var(--text-color-alt);
+      color: var(--color-teal-50);
     }
   }
 
   .grid {
-    background-color: var(--bg-color-alt);
+    background-color: var(--color-bg-secondary);
     flex-grow: 1;
     display: flex;
     position: relative;
@@ -193,7 +195,7 @@ nav.festival-list {
           display: flex;
           grid-column: 1;
           grid-row: auto / span 4;
-          border-top: solid 1px hsl(0, 0%, 40%);
+          border-top: solid 1px var(--color-border-teal-60);
           &:first-child {
             border-top: none;
           }
@@ -206,39 +208,44 @@ nav.festival-list {
         font-size: calc(1.6 * var(--row-height));
         z-index: 50;
         grid-column: 1;
-        background-color: var(--brand-bg-color);
-        transition: background-color 0.2s ease-in-out;
+        background: var(--card-bg);
+        transition: background 0.2s ease-in-out;
 
         vertical-align: middle;
         text-align: center;
+        font-weight: 200;
 
         display: flex;
         place-content: center;
         place-items: center;
         line-height: 110%;
 
-        &:hover {
-          cursor: pointer;
-          background-color: var(--brand-bg-color-alt);
+        &.adjacent {
+          border-top: solid 1px var(--color-teal-40);
         }
 
-        &.adjacent {
-          border-top: solid 1px var(--brand-color-lighter);
+        &:hover {
+          cursor: pointer;
+          background: var(--card-bg-alt);
         }
 
         &.favorite {
-          background-color: var(--brand-color);
-          font-weight: 700;
+          background: var(--card-bg-emphasis);
+          font-weight: 600;
+
+          &:hover {
+            background: var(--card-bg-emphasis-alt);
+          }
         }
 
         .notes {
           display: block;
-          color: var(--brand-color-lighter);
+          color: var(--color-mint-60);
         }
 
         .b2b {
           font-style: italic;
-          color: var(--brand-color-lighter);
+          color: var(--color-mint-60);
           display: block;
         }
       }
@@ -252,6 +259,9 @@ nav.festival-list {
         display: block;
 
         margin: 0 0.5rem;
+
+        color: var(--color-mint-60);
+        font-weight: 500;
       }
     }
   }
