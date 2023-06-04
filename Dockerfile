@@ -13,3 +13,4 @@ WORKDIR /app
 COPY --from=build /app/dist ./dist
 COPY . .
 COPY ./nginx.conf /etc/nginx/nginx.conf
+EXPOSE 8080
