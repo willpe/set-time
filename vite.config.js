@@ -15,7 +15,7 @@ export default defineConfig({
         enabled: true,
       },
       manifest: {
-        theme_color: "#2DD29B",
+        theme_color: "#144a52",
         background_color: "#05272E",
         display: "standalone",
         scope: "/",
@@ -39,6 +39,7 @@ export default defineConfig({
             src: "/icon-256.png",
             sizes: "256x256",
             type: "image/png",
+            purpose: "any maskable",
           },
           {
             src: "/icon-384.png",
