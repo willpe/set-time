@@ -4,7 +4,7 @@ import SpotifyClient from "../SpotifyClient";
 import { UserContext } from "../contexts/UserContext";
 import User from "../components/timeline/User";
 
-import {ReactComponent as Wordmark} from "../assets/logos/wordmark-logo.svg";
+import { ReactComponent as Wordmark } from "../assets/logos/wordmark-logo.svg";
 
 export default function Root() {
   const spotifyClient = new SpotifyClient();
@@ -24,7 +24,9 @@ export default function Root() {
     <UserContext.Provider value={userContext}>
       <header>
         <h1>
-          <a href="/"> <Wordmark /> </a>
+          <a href="/" title="Home">
+            <Wordmark />
+          </a>
         </h1>
         <User />
       </header>

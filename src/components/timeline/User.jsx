@@ -14,7 +14,15 @@ export default function User() {
     return (
       <div className="user">
         <a href="/profile">
-          {user.image ? <img src={user.image} /> : user.display_name}
+          {user.image ? (
+            <img
+              src={user.image}
+              alt="User Profile Photo"
+              title="User Profile"
+            />
+          ) : (
+            user.display_name
+          )}
         </a>
       </div>
     );

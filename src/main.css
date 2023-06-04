@@ -163,7 +163,6 @@ nav.festival-list {
     position: relative;
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
-    //background-color: var(--bg-color-alt);
 
     .stages {
       position: absolute;
