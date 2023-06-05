@@ -29,7 +29,9 @@ export default function Root() {
         <User />
       </header>
       <Outlet />
-      <footer>hello from seattle</footer>
+      <footer>
+        hello from seattle <span className="version">{APP_VERSION}</span>
+      </footer>
     </UserContext.Provider>
   );
 }
