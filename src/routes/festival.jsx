@@ -18,13 +18,20 @@ export async function loader({ params }) {
   }
 
   const festival = await result.json();
+
+  const scheduleResponse = await fetch(`/schedules/${params.festivalId}/schedule.md`);
+  if (scheduleResponse) {
+    const text = await scheduleResponse.text();
+    let schedule = parse(festival.name, text);
+    festival.schedule = schedule;
+  }
+
   return { festival };
 }
 
 export default function Festival() {
   const { festival } = useLoaderData();
-  const storedFavorites =
-    localStorage.getItem(`favorites-${festival.id}`)?.split(",") || [];
+  const storedFavorites = localStorage.getItem(`favorites-${festival.id}`)?.split(",") || [];
 
   const [favorites, setFavorites] = useState(storedFavorites);
   function toggleFavorite(key) {

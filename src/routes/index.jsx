@@ -13,7 +13,7 @@ export default function Index() {
     <main className="list">
       <nav className="festival-list">
         {festivals.map((festival) => (
-          <Link to={`/festivals/${festival.id}`}>{festival.name}</Link>
+          <Link to={`/${festival.id}`}>{festival.name}</Link>
         ))}
       </nav>
     </main>

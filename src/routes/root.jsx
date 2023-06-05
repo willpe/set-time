@@ -4,6 +4,8 @@ import SpotifyClient from "../SpotifyClient";
 import { UserContext } from "../contexts/UserContext";
 import User from "../components/timeline/User";
 
+import { TimeContext } from "../contexts/TimeContext";
+
 import { ReactComponent as Wordmark } from "../assets/wordmark-logo.svg";
 
 export default function Root() {
@@ -18,20 +20,30 @@ export default function Root() {
     spotifyClient: spotifyClient,
   };
 
+  const [time, setTime] = useState(new Date("Fri Jun 9, 2023 22:47"));
+  const timeContext = {
+    time: time,
+    isWithin: (start, end) => {
+      return time >= start && time <= end;
+    },
+  };
+
   spotifyClient.handleLoginResponse(setUser);
 
   return (
     <UserContext.Provider value={userContext}>
-      <header>
-        <a className="logo" href="/" title="Home">
-          <Wordmark />
-        </a>
-        <User />
-      </header>
-      <Outlet />
-      <footer>
-        hello from seattle <span className="version">{APP_VERSION}</span>
-      </footer>
+      <TimeContext.Provider value={timeContext}>
+        <header>
+          <a className="logo" href="/" title="Home">
+            <Wordmark />
+          </a>
+          <User />
+        </header>
+        <Outlet />
+        <footer>
+          hello from seattle <span className="version">{APP_VERSION}</span>
+        </footer>
+      </TimeContext.Provider>
     </UserContext.Provider>
   );
 }
