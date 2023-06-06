@@ -18,16 +18,12 @@ function TimeScale({ start, end }) {
   }
 
   // Fill out the grid for the last hour
-  content.push(
-    <div key="final" style={{ gridRowStart: 4 * (duration + 2) - 1 }} />
-  );
+  content.push(<div key="final" style={{ gridRowStart: 4 * (duration + 2) - 1 }} />);
 
   return (
     <div
       className="times"
-      data-range={`from ${start.getHours()} to ${
-        (start.getHours() + duration) % 24
-      } (${duration} hrs)`}
+      data-range={`from ${start.getHours()} to ${(start.getHours() + duration) % 24} (${duration} hrs)`}
     >
       {content}
     </div>
@@ -41,13 +37,7 @@ function GridLines({ start, end }) {
   const content = [];
   for (let i = 0; i < duration + 2; i++) {
     const rowStart = 4 * i + 1;
-    content.push(
-      <div
-        data-hour={hour + i}
-        key={rowStart}
-        style={{ gridRowStart: rowStart }}
-      ></div>
-    );
+    content.push(<div data-hour={hour + i} key={rowStart} style={{ gridRowStart: rowStart }}></div>);
 
     hour = (hour + 1) % 24;
   }
@@ -55,9 +45,7 @@ function GridLines({ start, end }) {
   return (
     <div
       className="gridlines"
-      data-range={`from ${start.getHours()} to ${
-        (start.getHours() + duration) % 24
-      } (${duration} hrs)`}
+      data-range={`from ${start.getHours()} to ${(start.getHours() + duration) % 24} (${duration} hrs)`}
     >
       {content}
     </div>

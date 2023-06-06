@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { FestivalContext } from "../../contexts/FestivalContext";
-import { TimeContext } from "../../contexts/TimeContext";
+import { FestivalContext } from "../contexts/FestivalContext";
+import { TimeContext } from "../contexts/TimeContext";
 
 import Performance from "./Performance";
 

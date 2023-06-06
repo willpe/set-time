@@ -1,6 +1,6 @@
 import { useContext } from "react";
 
-import { UserContext } from "../../contexts/UserContext";
+import { UserContext } from "../contexts/UserContext";
 
 export default function User() {
   const userContext = useContext(UserContext);
@@ -14,15 +14,7 @@ export default function User() {
     return (
       <div className="user">
         <a href="/profile">
-          {user.image ? (
-            <img
-              src={user.image}
-              alt="User Profile Photo"
-              title="User Profile"
-            />
-          ) : (
-            user.display_name
-          )}
+          {user.image ? <img src={user.image} alt="User Profile Photo" title="User Profile" /> : user.display_name}
         </a>
       </div>
     );

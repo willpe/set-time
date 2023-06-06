@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { FestivalContext } from "../../contexts/FestivalContext";
+import { FestivalContext } from "../contexts/FestivalContext";
 import Day from "./Day";
 
 export default function Schedule() {

@@ -1,8 +1,9 @@
 import { useContext } from "react";
-import { FestivalContext } from "../../contexts/FestivalContext";
-import { TimeContext } from "../../contexts/TimeContext";
+import { FestivalContext } from "../contexts/FestivalContext";
+import { TimeContext } from "../contexts/TimeContext";
 
 import Set from "./Set";
+import { Link } from "react-router-dom";
 
 export default function HappeningNow() {
   const { festival } = useContext(FestivalContext);
@@ -33,6 +34,8 @@ export default function HappeningNow() {
       {now.map(({ stage, set }) => (
         <Set key={set.id} set={set} stage={stage} day={today} />
       ))}
+
+      <Link to="timeline">View Full Timeline</Link>
     </section>
   );
 }
