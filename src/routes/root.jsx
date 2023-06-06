@@ -21,7 +21,9 @@ export default function Root() {
   };
 
   const shortTimeStyle = { hourCycle: "h23", timeStyle: "short" };
-  const [time, setTime] = useState(new Date("Sat Jun 10, 2023 02:47"));
+
+  const synthTime = undefined; //"Sat Jun 10, 2023 02:47";
+  const [time, setTime] = useState(new Date());
   const timeContext = {
     time: time,
     timeShort: time.toLocaleTimeString([], shortTimeStyle),

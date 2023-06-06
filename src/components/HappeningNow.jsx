@@ -10,6 +10,16 @@ export default function HappeningNow() {
   const { time, timeShort, isHappeningNow } = useContext(TimeContext);
 
   const today = festival.schedule.days.find((day) => isHappeningNow(day.opens, day.closes));
+  if (!today)
+    return (
+      <>
+        Nothing is happening right now.
+        <div>
+          <small className="muted">{time.toLocaleString()}</small>
+        </div>
+      </>
+    );
+
   const now = [];
   today.stages.forEach((stage) => {
     stage.sets.forEach((set) => {
