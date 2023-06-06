@@ -1,4 +1,4 @@
-export default function SpotifyClient(setUser) {
+export default function SpotifyClient() {
   const clientId = "bd053d5d370346cfa51511a03d391915";
   const scope = "user-read-private user-read-email";
   const redirectUri = window.location.origin;
@@ -12,8 +12,7 @@ export default function SpotifyClient(setUser) {
 
   function generateRandomString(length) {
     let text = "";
-    let possible =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
     for (let i = 0; i < length; i++) {
       text += possible.charAt(Math.floor(Math.random() * possible.length));
@@ -87,10 +86,7 @@ export default function SpotifyClient(setUser) {
     });
 
     if (!response.ok) {
-      throw new Error(
-        "Failed to obtain an access token from Spotify. HTTP status " +
-          response.status
-      );
+      throw new Error("Failed to obtain an access token from Spotify. HTTP status " + response.status);
     }
 
     const token = response.json();
@@ -156,9 +152,7 @@ export default function SpotifyClient(setUser) {
       localStorage.setItem(localStorageKeys.profile, jsonProfile);
 
       // Get the original URL
-      let returnUrl = decodeURIComponent(
-        localStorage.getItem(localStorageKeys.returnUrl) || "/"
-      );
+      let returnUrl = decodeURIComponent(localStorage.getItem(localStorageKeys.returnUrl) || "/");
 
       // Clear the pending login state
       localStorage.removeItem(localStorageKeys.codeVerifier);

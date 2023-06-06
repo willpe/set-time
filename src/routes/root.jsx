@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Outlet } from "react-router";
-import SpotifyClient from "../SpotifyClient";
+import SpotifyClient from "../services/SpotifyClient";
 import { UserContext } from "../contexts/UserContext";
-import User from "../components/timeline/User";
+import User from "../components/User";
 
 import { TimeContext } from "../contexts/TimeContext";
 
@@ -26,6 +26,7 @@ export default function Root() {
     isWithin: (start, end) => {
       return time >= start && time <= end;
     },
+    setTime: setTime,
   };
 
   spotifyClient.handleLoginResponse(setUser);

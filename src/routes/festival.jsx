@@ -6,7 +6,7 @@ import { Outlet } from "react-router-dom";
 
 import { FestivalContext } from "../contexts/FestivalContext";
 
-import Schedule from "../components/timeline/Schedule";
+import Schedule from "../components/Schedule";
 
 export async function loader({ params }) {
   const result = await fetch(`/schedules/${params.festivalId}/festival.json`);

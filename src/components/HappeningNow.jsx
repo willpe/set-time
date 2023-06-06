@@ -7,11 +7,7 @@ import { Link } from "react-router-dom";
 
 export default function HappeningNow() {
   const { festival } = useContext(FestivalContext);
-  const { time } = useContext(TimeContext);
-
-  function isWithin(start, end) {
-    return time >= start && time <= end;
-  }
+  const { time, isWithin } = useContext(TimeContext);
 
   const today = festival.schedule.days.find((day) => isWithin(day.opens, day.closes));
   const now = [];

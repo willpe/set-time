@@ -8,9 +8,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "./routes/root.jsx";
 import Festival, { loader as festivalLoader } from "./routes/festival.jsx";
 import Index, { loader as indexLoader } from "./routes/index.jsx";
-import Schedule from "./components/timeline/Schedule.jsx";
 import Profile from "./routes/profile.jsx";
-import HappeningNow from "./components/timeline/HappeningNow.jsx";
+import Schedule from "./components/Schedule.jsx";
+import HappeningNow from "./components/HappeningNow.jsx";
 
 const router = createBrowserRouter([
   {
