@@ -46,26 +46,14 @@ export default function SpotifyClient() {
   }
 
   async function getProfile() {
-    return {
-      country: "US",
-      display_name: "Will Perry",
-      email: "willpe@outlook.com",
-      explicit_content: { filter_enabled: false, filter_locked: false },
-      external_urls: { spotify: "https://open.spotify.com/user/wperr" },
-      followers: { href: null, total: 54 },
-      href: "https://api.spotify.com/v1/users/wperr",
-      id: "wperr",
-      images: [
-        {
-          height: null,
-          url: "https://i.scdn.co/image/ab6775700000ee85e54a858b1fcda9c684acff02",
-          width: null,
-        },
-      ],
-      product: "premium",
-      type: "user",
-      uri: "spotify:user:wperr",
-    };
+    // TODO: Auth Token
+    const response = await fetch("https://api.spotify.com/v1/me");
+
+    if (!response.ok) {
+      throw new Error("Failed to load current user profile from Spotify. HTTP status " + response.status);
+    }
+
+    return await response.json();
   }
 
   async function requestAccessToken(code, codeVerifier) {

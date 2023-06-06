@@ -6,6 +6,11 @@ export default function User() {
   const userContext = useContext(UserContext);
   const user = userContext.user;
 
+  const enableLogin = false;
+  if (!enableLogin) {
+    return null;
+  }
+
   if (userContext.isLoggedIn) {
     if (user.images.length > 0) {
       user.image = user.images[0].url;
