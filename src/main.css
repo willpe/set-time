@@ -274,12 +274,15 @@ section.now {
   flex-direction: row;
 
   .times {
-    --row-height: 0.5rem;
     width: 2.3rem;
     text-align: center;
 
     display: grid;
     grid-auto-rows: var(--row-height);
+
+    @media (min-width: 700px) and (max-width: 800px) {
+      grid-auto-rows: calc(1.5 * var(--row-height));
+    }
 
     div {
       grid-row-end: span 2;
@@ -328,6 +331,10 @@ section.now {
       display: grid;
       grid-auto-rows: var(--row-height);
 
+      @media (min-width: 700px) and (max-width: 800px) {
+        grid-auto-rows: calc(1.5 * var(--row-height));
+      }
+
       .gridlines {
         position: absolute;
         left: 0;
@@ -338,6 +345,10 @@ section.now {
         z-index: 10;
         display: grid;
         grid-auto-rows: var(--row-height);
+
+        @media (min-width: 700px) and (max-width: 800px) {
+          grid-auto-rows: calc(1.5 * var(--row-height));
+        }
 
         div {
           display: flex;
@@ -372,18 +383,18 @@ section.now {
           border-top: solid 1px var(--color-teal-40);
         }
 
-        &:hover {
+        /* &:hover {
           cursor: pointer;
           background: var(--card-bg-alt);
-        }
+        } */
 
         &.favorite {
           background: var(--card-bg-emphasis);
           font-weight: 600;
 
-          &:hover {
+          /* &:hover {
             background: var(--card-bg-emphasis-alt);
-          }
+          } */
         }
 
         .notes {
@@ -402,11 +413,12 @@ section.now {
         padding: 0;
         text-align: center;
         display: block;
+        line-height: 1;
 
         margin: 0 0.5rem;
 
         color: var(--color-mint-60);
-        font-weight: 500;
+        font-weight: 400;
       }
     }
   }
