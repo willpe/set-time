@@ -189,7 +189,7 @@ nav.festival-list {
 
   .b2b {
     font-style: italic;
-    color: var(--color-mint-60);
+    color: var(--color-mint-40);
   }
 }
 
@@ -237,25 +237,25 @@ section.now {
 
     .set-stage {
       color: var(--color-teal-20);
-      font-size: 1.2rem;
-      font-weight: 600;
+      font-size: 1rem;
+      font-weight: 400;
     }
 
     .set-performance {
-      font-size: 2rem;
+      font-size: 1.5rem;
+      font-weight: 00;
     }
 
     .set-times {
       color: var(--color-teal-20);
-      font-weight: 300;
+      font-weight: 400;
 
       .ending-soon {
         display: block;
       }
     }
-
     &:hover {
-      background: var(--color-teal-80);
+      cursor: initial;
     }
 
     &.favorite {
@@ -263,11 +263,7 @@ section.now {
 
       .set-stage,
       .set-times {
-        color: var(--color-mint-60);
-      }
-
-      &:hover {
-        background: var(--card-bg-emphasis-alt);
+        color: var(--color-mint-40);
       }
     }
   }
