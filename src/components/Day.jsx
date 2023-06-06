@@ -1,3 +1,7 @@
+import { useContext } from "react";
+import { Link } from "react-router-dom";
+import { TimeContext } from "../contexts/TimeContext";
+
 import Set from "./Set";
 
 function TimeScale({ start, end }) {
@@ -53,9 +57,22 @@ function GridLines({ start, end }) {
 }
 
 export default function Day({ day }) {
+  const { isHappeningNow } = useContext(TimeContext);
+  const isNow = isHappeningNow(day.opens, day.closes);
+  console.log(day);
+
   return (
     <section className="day" key={day.id} data-id={day.id}>
-      <h2>{day.name}</h2>
+      <div className="day-header">
+        <h2>{day.name}</h2>
+        {isNow ? (
+          <Link to="./now" className="button">
+            Today
+          </Link>
+        ) : (
+          <small>{day.dateShort}</small>
+        )}
+      </div>
       <div className="timeline">
         <TimeScale start={day.opens} end={day.closes} />
 

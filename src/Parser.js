@@ -1,4 +1,5 @@
 const shortTimeStyle = { hourCycle: "h23", timeStyle: "short" };
+const shortDateStyle = { month: "long", day: "numeric" };
 
 function parseDay(line) {
   const dayPattern = /^#\s+(.*)/;
@@ -14,6 +15,7 @@ function parseDay(line) {
       id: date.toISOString().slice(0, 10),
       name: dayName,
       date: date,
+      dateShort: date.toLocaleDateString(navigator.language, shortDateStyle),
       opens: null,
       closes: null,
       stages: [],

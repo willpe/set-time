@@ -61,6 +61,7 @@ export default function Festival() {
       return isFavorite;
     },
   };
+
   return (
     <FestivalContext.Provider value={context}>
       <main>

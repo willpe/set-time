@@ -48,7 +48,6 @@ header {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-bottom: 1rem;
 
   background-color: var(--color-teal-80);
   @media (min-width: 700px) {
@@ -119,14 +118,28 @@ main header {
 
 section.day {
   margin-inline: 0;
+  margin-block-end: 2rem;
 
   @media (min-width: 700px) {
     background-color: initial;
     margin-block: 1rem;
   }
 
-  h2 {
-    margin-inline: 0.5rem;
+  .day-header {
+    margin: 0 0.5rem 0.5rem 2.3rem;
+    display: flex;
+    align-items: center;
+    :first-child {
+      flex-grow: 1;
+    }
+    h2 {
+      margin-block: 0.25rem;
+    }
+    small {
+      color: var(--color-teal-40);
+      font-size: 1.2rem;
+      font-weight: 300;
+    }
   }
 }
 
@@ -186,6 +199,38 @@ section.now {
 
   gap: 0.5rem;
 
+  header {
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    :first-child {
+      flex-grow: 1;
+    }
+
+    .muted {
+      color: var(--color-teal-40);
+      font-weight: 300;
+    }
+
+    aside {
+      display: inline-block;
+      font-size: 1.5rem;
+      color: var(--color-teal-40);
+      font-weight: 300;
+    }
+  }
+
+  footer {
+    font-size: 1.5rem;
+
+    a.button {
+      padding: 0.5rem 1.5rem;
+    }
+  }
+
   .card {
     background: var(--color-teal-100);
     padding: 1rem 0.5rem;
@@ -234,6 +279,8 @@ section.now {
 
   .times {
     --row-height: 0.5rem;
+    width: 2.3rem;
+    text-align: center;
 
     display: grid;
     grid-auto-rows: var(--row-height);

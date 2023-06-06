@@ -132,7 +132,8 @@ h3 {
 }
 
 /* // TODO: Style buttons */
-button {
+button,
+a.button {
   border-radius: 2rem;
   border: 1px solid transparent;
   padding: 0.3em 0.9em;
@@ -143,13 +144,13 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
   color: var(--color-text-primary);
-}
-button:hover {
-  border-color: var(--color-teal-20);
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  &:hover {
+    border-color: var(--color-teal-20);
+  }
+  &:focus,
+  &:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+  }
 }
 
 footer {

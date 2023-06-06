@@ -20,10 +20,12 @@ export default function Root() {
     spotifyClient: spotifyClient,
   };
 
+  const shortTimeStyle = { hourCycle: "h23", timeStyle: "short" };
   const [time, setTime] = useState(new Date("Sat Jun 10, 2023 02:47"));
   const timeContext = {
     time: time,
-    isWithin: (start, end) => {
+    timeShort: time.toLocaleTimeString([], shortTimeStyle),
+    isHappeningNow: (start, end) => {
       return time >= start && time <= end;
     },
     setTime: setTime,

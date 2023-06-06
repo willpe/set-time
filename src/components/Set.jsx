@@ -12,7 +12,7 @@ export default function Set({ set, stage, day }) {
   const isFavorite = festivalContext.isFavorite(day.id, stage.id, set.id);
 
   const timeContext = useContext(TimeContext);
-  const isNow = timeContext.isWithin(set.startTime, set.endTime);
+  const isNow = timeContext.isHappeningNow(set.startTime, set.endTime);
   const remainingMinutes = isNow ? (set.endTime - timeContext.time) / 1000 / 60 : null;
 
   return (
