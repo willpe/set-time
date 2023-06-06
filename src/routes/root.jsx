@@ -20,7 +20,7 @@ export default function Root() {
     spotifyClient: spotifyClient,
   };
 
-  const [time, setTime] = useState(new Date("Fri Jun 9, 2023 22:47"));
+  const [time, setTime] = useState(new Date("Sat Jun 10, 2023 02:47"));
   const timeContext = {
     time: time,
     isWithin: (start, end) => {

@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { FestivalContext } from "../../contexts/FestivalContext";
 import { TimeContext } from "../../contexts/TimeContext";
 
-import Performance from "./Performance";
+import Set from "./Set";
 
 export default function HappeningNow() {
   const { festival } = useContext(FestivalContext);
@@ -30,15 +30,8 @@ export default function HappeningNow() {
         {today.name} {time.toLocaleTimeString()}
       </h2>
 
-      {now.map(({ stage, set, remainingMinutes }) => (
-        <div className="card" key={`${stage.id}/${set.id}`}>
-          <h3>{stage.name}</h3>
-          <Performance performance={set.performance} />
-          <small>
-            {set.startTime.toLocaleTimeString()} - {set.endTime.toLocaleTimeString()}
-            {remainingMinutes < 15 ? <span className="ending-soon"> (ending soon)</span> : null}
-          </small>
-        </div>
+      {now.map(({ stage, set }) => (
+        <Set key={set.id} set={set} stage={stage} day={today} />
       ))}
     </section>
   );

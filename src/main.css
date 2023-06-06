@@ -141,6 +141,93 @@ nav.festival-list {
   }
 }
 
+.card {
+  background: var(--card-bg);
+  transition: background 0.2s ease-in-out;
+
+  vertical-align: middle;
+  text-align: center;
+  font-weight: 400;
+
+  display: flex;
+  place-content: center;
+  place-items: center;
+  gap: 1rem;
+
+  flex-direction: column;
+
+  &:hover {
+    cursor: pointer;
+    background: var(--card-bg-alt);
+  }
+
+  &.favorite {
+    background: var(--card-bg-emphasis);
+    font-weight: 600;
+
+    &:hover {
+      background: var(--card-bg-emphasis-alt);
+    }
+  }
+
+  .notes {
+    color: var(--color-mint-60);
+  }
+
+  .b2b {
+    font-style: italic;
+    color: var(--color-mint-60);
+  }
+}
+
+section.now {
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.5rem;
+
+  .card {
+    background: var(--color-teal-100);
+    padding: 1rem 0.5rem;
+
+    .set-stage {
+      color: var(--color-teal-20);
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .set-performance {
+      font-size: 2rem;
+    }
+
+    .set-times {
+      color: var(--color-teal-20);
+      font-weight: 300;
+
+      .ending-soon {
+        display: block;
+      }
+    }
+
+    &:hover {
+      background: var(--color-teal-80);
+    }
+
+    &.favorite {
+      background: var(--card-bg-emphasis);
+
+      .set-stage,
+      .set-times {
+        color: var(--color-mint-60);
+      }
+
+      &:hover {
+        background: var(--card-bg-emphasis-alt);
+      }
+    }
+  }
+}
+
 .timeline {
   display: flex;
   flex-direction: row;
@@ -226,17 +313,17 @@ nav.festival-list {
         font-size: calc(1.6 * var(--row-height));
         z-index: 50;
         grid-column: 1;
-        background: var(--card-bg);
-        transition: background 0.2s ease-in-out;
 
-        vertical-align: middle;
-        text-align: center;
-        font-weight: 400;
-
-        display: flex;
-        place-content: center;
-        place-items: center;
         line-height: 110%;
+
+        gap: 0;
+
+        flex-direction: row;
+
+        .set-stage,
+        .set-times {
+          display: none;
+        }
 
         &.adjacent {
           border-top: solid 1px var(--color-teal-40);
@@ -258,12 +345,9 @@ nav.festival-list {
 
         .notes {
           display: block;
-          color: var(--color-mint-60);
         }
 
         .b2b {
-          font-style: italic;
-          color: var(--color-mint-60);
           display: block;
         }
       }

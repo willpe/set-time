@@ -1,4 +1,4 @@
-const shortTimeStyle = { hourCycle: "h24", timeStyle: "short" };
+const shortTimeStyle = { hourCycle: "h23", timeStyle: "short" };
 
 function parseDay(line) {
   const dayPattern = /^#\s+(.*)/;
@@ -100,10 +100,7 @@ function parseSet(line, date, previousSet) {
     }
 
     // replace all non-alphanumeric characters with dashes
-    const setId =
-      setMatch[1].replace(/:/g, "") +
-      "-" +
-      setMatch[3].replace(/\W/g, "-").toLowerCase();
+    const setId = setMatch[1].replace(/:/g, "") + "-" + setMatch[3].replace(/\W/g, "-").toLowerCase();
 
     const performance = parsePerformance(setMatch[3]);
 
@@ -115,9 +112,7 @@ function parseSet(line, date, previousSet) {
       end: endTime.toLocaleTimeString(navigator.language, shortTimeStyle),
       duration: (endTime.getTime() - startTime.getTime()) / 1000 / 60 / 60,
       performance: performance,
-      adjacent: !!(
-        previousSet && previousSet.endTime.getTime() === startTime.getTime()
-      ),
+      adjacent: !!(previousSet && previousSet.endTime.getTime() === startTime.getTime()),
     };
   }
 

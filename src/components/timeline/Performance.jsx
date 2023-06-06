@@ -1,6 +1,6 @@
 export default function Performance({ performance }) {
   return (
-    <p>
+    <>
       {performance.artist}
       {performance.b2b ? (
         <>
@@ -9,6 +9,6 @@ export default function Performance({ performance }) {
         </>
       ) : null}
       {performance.notes ? <span className="notes">({performance.notes})</span> : null}
-    </p>
+    </>
   );
 }
