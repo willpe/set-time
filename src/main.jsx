@@ -6,7 +6,7 @@ import "./main.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "./routes/root.jsx";
-import Festival, { loader as festivalLoader } from "./routes/festival.jsx";
+import Festival, { loader as festivalLoader, FestivalIndex } from "./routes/festival.jsx";
 import Index, { loader as indexLoader } from "./routes/index.jsx";
 import Profile from "./routes/profile.jsx";
 import Schedule from "./components/Schedule.jsx";
@@ -28,7 +28,8 @@ const router = createBrowserRouter([
         element: <Festival />,
         loader: festivalLoader,
         children: [
-          { index: true, element: <Schedule /> },
+          { index: true, element: <FestivalIndex />, loader: festivalLoader },
+          { path: "schedule", element: <Schedule /> },
           { path: "now", element: <HappeningNow /> },
         ],
       },

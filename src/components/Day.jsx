@@ -65,7 +65,7 @@ export default function Day({ day }) {
       <div className="day-header">
         <h2>{day.name}</h2>
         {isNow ? (
-          <Link to="./now" className="button">
+          <Link to="../now" className="button">
             Today
           </Link>
         ) : (

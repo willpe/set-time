@@ -18,7 +18,7 @@ export default function HappeningNow() {
           <small className="muted">It's {time.toLocaleString()}</small>
         </div>
 
-        <Link to="../" className="button">
+        <Link to="../schedule" className="button">
           Full Schedule
         </Link>
       </div>

@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useLoaderData } from "react-router";
 
 import { parse } from "../Parser";
-import { Outlet } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 
 import { FestivalContext } from "../contexts/FestivalContext";
+import { TimeContext } from "../contexts/TimeContext";
 
 import Schedule from "../components/Schedule";
 
@@ -27,6 +28,18 @@ export async function loader({ params }) {
   }
 
   return { festival };
+}
+
+export function FestivalIndex() {
+  const { festival } = useLoaderData();
+  const { isHappeningNow } = useContext(TimeContext);
+
+  const today = festival.schedule.days.find((day) => isHappeningNow(day.opens, day.closes));
+  if (today) {
+    return <Navigate to="./now" />;
+  }
+
+  return <Navigate to="./schedule" />;
 }
 
 export default function Festival() {
