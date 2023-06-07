@@ -12,12 +12,16 @@ export default function HappeningNow() {
   const today = festival.schedule.days.find((day) => isHappeningNow(day.opens, day.closes));
   if (!today)
     return (
-      <>
-        Nothing is happening right now.
+      <div className="nothing-happening">
+        <h2>Nothing is happening right now.</h2>
         <div>
-          <small className="muted">{time.toLocaleString()}</small>
+          <small className="muted">It's {time.toLocaleString()}</small>
         </div>
-      </>
+
+        <Link to="../" className="button">
+          Full Schedule
+        </Link>
+      </div>
     );
 
   const now = [];
