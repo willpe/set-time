@@ -59,7 +59,6 @@ function GridLines({ start, end }) {
 export default function Day({ day }) {
   const { isHappeningNow } = useContext(TimeContext);
   const isNow = isHappeningNow(day.opens, day.closes);
-  console.log(day);
 
   return (
     <section className="day" key={day.id} data-id={day.id}>

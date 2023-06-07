@@ -7,6 +7,7 @@ import User from "../components/User";
 import { TimeContext } from "../contexts/TimeContext";
 
 import { ReactComponent as Wordmark } from "../assets/wordmark-logo.svg";
+import useTime from "../hooks/UseTime";
 
 export default function Root() {
   const spotifyClient = new SpotifyClient();
@@ -20,18 +21,13 @@ export default function Root() {
     spotifyClient: spotifyClient,
   };
 
-  const shortTimeStyle = { hourCycle: "h23", timeStyle: "short" };
-
-  const synthTime = undefined; //"Sat Jun 10, 2023 02:47";
-  const [time, setTime] = useState(new Date());
-  const timeContext = {
-    time: time,
-    timeShort: time.toLocaleTimeString([], shortTimeStyle),
-    isHappeningNow: (start, end) => {
-      return time >= start && time <= end;
-    },
-    setTime: setTime,
+  const urlParams = new URLSearchParams(window.location.search);
+  const timeOptions = {
+    interval: urlParams.get("ti") || 15000,
+    start: urlParams.get("ts"),
+    velocity: urlParams.get("tv"),
   };
+  const timeContext = useTime(timeOptions);
 
   spotifyClient.handleLoginResponse(setUser);
 
