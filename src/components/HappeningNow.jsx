@@ -48,7 +48,7 @@ export default function HappeningNow() {
       ))}
 
       <footer>
-        <Link to="../" className="button">
+        <Link to="../schedule" className="button">
           Full Schedule
         </Link>
       </footer>
