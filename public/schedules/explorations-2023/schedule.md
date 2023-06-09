@@ -36,7 +36,7 @@
 
 - 12:00-15:00 Dom Donnelly
 - 15:00-18:00 Hosini
-- 18:00-21:00 Cornelius SA
+- 18:00-21:00 SEVAN b2b Laura T
 - 21:00-23:00 Warung
 - 23:00-01:00 Braxton
 - 01:00-03:00 Michael Cassette
@@ -191,10 +191,10 @@ The Sundeck at Sanur
 
 ## The Cove
 
-- 12:00-15:00 Jesse Marcella
+- 12:00-15:00 Hiatus
 - 15:00-18:00 Arina Mur
 - 18:00-21:00 Martin Roth
-- 21:00-00:00 Frost
+- 21:00-00:00 Jessie Marcella
 - 00:00-03:00 Makebo & Amonita
 
 ## Yacht Club
@@ -236,11 +236,12 @@ The Sundeck at Sanur
 ## The Cove
 
 - 12:00-15:00 Da Luka
-- 15:00-17:00 Daniel Curpen
+- 15:00-17:00 Rob Denman
 - 17:00-18:00 Natascha Polke (Live)
 - 18:00-21:00 Khen
 - 21:00-00:00 Volen Sentir
 - 00:00-03:00 Gorje Hewek
+- 03:00-05:00 SOULSEEk
 
 ## Yacht Club
 
