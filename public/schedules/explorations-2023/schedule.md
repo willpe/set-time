@@ -95,8 +95,8 @@ Havana Beach Club
 ## Yacht Club
 
 - 19:00-21:00 DD Goose
-- 21:00-23:00 Gareth From The Office
-- 23:00-01:00 Dom Donnelly (Trance Set)
+- 21:00-00:00 Gareth From The Office
+- 20:00-01:00 Dom Donnelly (Trance Set)
 - 01:00-03:00 Marsh (Trance Set)
 
 ## Gjipe
@@ -241,7 +241,6 @@ The Sundeck at Sanur
 - 18:00-21:00 Khen
 - 21:00-00:00 Volen Sentir
 - 00:00-03:00 Gorje Hewek
-- 03:00-05:00 SOULSEEk
 
 ## Yacht Club
 
@@ -252,8 +251,8 @@ The Sundeck at Sanur
 
 ## Gjipe
 
-- 12:00-15:00 Boxer
-- 15:00-18:30 P.O.S
+- 12:00-15:30 Boxer
+- 15:30-18:30 P.O.S
 
 ## Wellness
 
