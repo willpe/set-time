@@ -96,7 +96,7 @@ Havana Beach Club
 
 - 19:00-21:00 DD Goose
 - 21:00-00:00 Gareth From The Office
-- 20:00-01:00 Dom Donnelly (Trance Set)
+- 00:00-01:00 Dom Donnelly (Trance Set)
 - 01:00-03:00 Marsh (Trance Set)
 
 ## Gjipe
