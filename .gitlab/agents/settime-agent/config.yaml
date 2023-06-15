@@ -1,7 +1,7 @@
 ci_access:
   # This agent is accessible from CI jobs in projects in these groups
   projects:
-  - id: will/set-time
+  - id: set-time/web
 
   groups:
-  - id: will
+  - id: set-time
