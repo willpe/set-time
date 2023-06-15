@@ -10,10 +10,6 @@ kubectl create namespace set-time
 kubectl config set-context –current –namespace=set-time
 ```
 
-## Configure DNS
-
-Go to [CloudFlare](https://dash.cloudflare.com) and add the relevant DNS records.
-
 ## Create Image Pull Secret
 
 Create a new access token in [GitLab](https://git.willperry.net/groups/set-time/-/settings/access_tokens)
@@ -28,7 +24,7 @@ Create a secret in kubernetes
 See: [Secret in 1Password](https://start.1password.com/open/i?a=74FPY646G5HDBPADZDW4WN755E&v=gr4f7dcd6azz7ljwzhvvhth7g4&i=6euyaizlpb2q5vw55sy2xxlqmy&h=my.1password.com)
 
 ```sh
-kubectl create secret docker-registry registry-secret --docker-server=registry.git.willperry.net --docker-username=set-time-vultr --docker-password=<<PASSWORD>> -n set-time
+kubectl create secret docker-registry registry-secret --docker-server=registry.git.willperry.net --docker-username=set-time-vultr --docker-password=<<PASSWORD>>
 ```
 
 ## Create CloudFlare DNS Challenge Secret
@@ -37,14 +33,87 @@ Store Cloudflare DNS Challenge Secret
 
 See: [Secret in 1Password](https://start.1password.com/open/i?a=74FPY646G5HDBPADZDW4WN755E&v=gr4f7dcd6azz7ljwzhvvhth7g4&i=ut3y4dka5higfuviun6byajyx4&h=my.1password.com)
 
+```sh
+kubectl create secret generic cloudflare-secret --type=Opaque --from-literal=api-token=<API-TOKEN>
+```
+
+## Install Cert Manager
+
+```sh
+helm repo add jetstack https://charts.jetstack.io
+helm repo update
+helm install \
+  cert-manager jetstack/cert-manager \
+  --namespace cert-manager \
+  --create-namespace \
+  --version v1.12.0 \
+  --set installCRDs=true
+```
+
+Add Staging and Prod Issuers
+
+issuers.yaml:
+
 ```yaml
-apiVersion: v1
-kind: Secret
+apiVersion: cert-manager.io/v1
+kind: Issuer
 metadata:
-  name: cloudflare-secret
-type: Opaque
-stringData:
-  api-token: <API Token>
+  name: letsencrypt-staging
+  namespace: set-time
+spec:
+  acme:
+    email: willpe@outlook.com
+    privateKeySecretRef:
+      name: letsencrypt-staging
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    solvers:
+      - dns01:
+          cloudflare:
+            apiTokenSecretRef:
+              name: cloudflare-secret
+              key: api-token
+---
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: letsencrypt-prod
+  namespace: set-time
+spec:
+  acme:
+    email: willpe@outlook.com
+    privateKeySecretRef:
+      name: letsencrypt
+    server: https://acme-v02.api.letsencrypt.org/directory
+    solvers:
+      - dns01:
+          cloudflare:
+            apiTokenSecretRef:
+              name: cloudflare-secret
+              key: api-token
+```
+
+Install certificate issuers
+
+```sh
+kubectl apply -f issuers.yaml
+```
+
+### Request Certificates
+
+```yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: web-cert
+  namespace: set-time
+spec:
+  issuerRef:
+    name: letsencrypt-prod
+  secretName: web-cert
+  commonName: setti.me
+  dnsNames:
+    - setti.me
+    - "*.setti.me"
 ```
 
 ## Install Traefik
@@ -123,96 +192,6 @@ kubectl port-forward $(kubectl get pods --selector "app.kubernetes.io/name=traef
 
 It can then be reached at: `http://127.0.0.1:9000/dashboard/`
 
-## Install Cert Manager
-
-```sh
-helm repo add jetstack https://charts.jetstack.io
-helm repo update
-helm install \
-  cert-manager jetstack/cert-manager \
-  --namespace cert-manager \
-  --create-namespace \
-  --version v1.12.0 \
-  --set installCRDs=true
-```
-
-Store Cloudflare DNS Challenge Secret
-
-```yaml
-apiVersion: v1
-kind: Secret
-metadata:
-  name: cloudflare-secret
-type: Opaque
-stringData:
-  api-token: <API Token>
-```
-
-Add Staging and Prod Issuers
-
-issuers.yaml:
-
-```yaml
-apiVersion: cert-manager.io/v1
-kind: Issuer
-metadata:
-  name: letsencrypt-staging
-  namespace: set-time
-spec:
-  acme:
-    email: willpe@outlook.com
-    privateKeySecretRef:
-      name: letsencrypt-staging
-    server: https://acme-staging-v02.api.letsencrypt.org/directory
-    solvers:
-      - dns01:
-          cloudflare:
-            apiTokenSecretRef:
-              name: cloudflare-secret
-              key: api-token
----
-apiVersion: cert-manager.io/v1
-kind: Issuer
-metadata:
-  name: letsencrypt-prod
-  namespace: set-time
-spec:
-  acme:
-    email: willpe@outlook.com
-    privateKeySecretRef:
-      name: letsencrypt
-    server: https://acme-v02.api.letsencrypt.org/directory
-    solvers:
-      - dns01:
-          cloudflare:
-            apiTokenSecretRef:
-              name: cloudflare-secret
-              key: api-token
-```
-
-Install certificate issuers
-
-```sh
-kubectl apply -n set-time -f issuers.yaml
-```
-
-### Request Certificates
-
-```yaml
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: web-cert
-  namespace: set-time
-spec:
-  issuerRef:
-    name: letsencrypt-prod
-  secretName: web-cert
-  commonName: fr.setti.me
-  dnsNames:
-    - fr.setti.me
-```
-
 ## Create Ingress
 
 ```yaml
@@ -223,7 +202,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-    - host: fr.setti.me
+    - host: setti.me
       http:
         paths:
           - backend:
@@ -235,6 +214,10 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - fr.setti.me
+        - setti.me
       secretName: web-cert
 ```
+
+## Configure DNS
+
+Go to [CloudFlare](https://dash.cloudflare.com) and add the relevant DNS records.
