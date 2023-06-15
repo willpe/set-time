@@ -4,13 +4,13 @@ metadata:
   name: web-cert
   namespace: set-time
 spec:
-  secretName: web--cert
+  secretName: web-cert
   issuerRef:
     name: letsencrypt
-  commonName: "setti.me"
+  commonName: setti.me
   dnsNames:
     - setti.me
-    - "*.setti.me"
+    - alpha.setti.me
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -55,7 +55,7 @@ metadata:
 spec:
   ingressClassName: traefik-external
   rules:
-    - host: setti.me
+    - host: alpha.setti.me
       http:
         paths:
           - backend:
@@ -67,5 +67,5 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - setti.me
+        - alpha.setti.me
       secretName: web-cert
