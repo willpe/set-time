@@ -56,9 +56,28 @@ function GridLines({ start, end }) {
   );
 }
 
+// Compute where to show the current time indicator
+function calculateCurrentTimeLinePosition(currentTime, startTime, endTime) {
+  // Compute the time the grid ebd,
+  // adjusting for the footer to the next whole hour
+  const end = new Date(endTime);
+  end.setMinutes(0);
+  end.setHours(end.getHours() + 1);
+
+  // Compute the offset from the start of the grid
+  const now = currentTime - startTime;
+
+  // Compute the length of the grid
+  const duration = end - startTime;
+
+  // Calculate the current percentage through the day
+  return Math.round((100 * now) / duration);
+}
+
 export default function Day({ day }) {
-  const { isHappeningNow } = useContext(TimeContext);
+  const { time, isHappeningNow } = useContext(TimeContext);
   const isNow = isHappeningNow(day.opens, day.closes);
+  const currentTimeOffset = isNow ? calculateCurrentTimeLinePosition(time, day.opens, day.closes) : null;
 
   return (
     <section className="day" key={day.id} data-id={day.id}>
@@ -84,6 +103,7 @@ export default function Day({ day }) {
                 {stage.sets.map((set) => (
                   <Set key={set.id} set={set} stage={stage} day={day} />
                 ))}
+                {isNow ? <div className="current-time" style={{ height: `${currentTimeOffset}%` }}></div> : null}
               </div>
             ))}
           </div>

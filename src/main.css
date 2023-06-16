@@ -398,18 +398,9 @@ section.now {
           border-top: solid 1px var(--color-teal-40);
         }
 
-        /* &:hover {
-          cursor: pointer;
-          background: var(--card-bg-alt);
-        } */
-
         &.favorite {
           background: var(--card-bg-emphasis);
           font-weight: 600;
-
-          /* &:hover {
-            background: var(--card-bg-emphasis-alt);
-          } */
         }
 
         .notes {
@@ -434,6 +425,19 @@ section.now {
 
         color: var(--color-mint-60);
         font-weight: 400;
+      }
+
+      .current-time {
+        position: absolute;
+        top: calc(4 * var(--row-height));
+        left: 0;
+        right: 0;
+        height: 2px;
+        background-color: var(--color-teal-100);
+        border-bottom: dashed 2px var(--color-mint-20);
+        opacity: 20%;
+
+        z-index: 100;
       }
     }
   }
