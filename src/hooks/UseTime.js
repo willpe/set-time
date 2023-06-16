@@ -8,23 +8,38 @@ export default function useTime(options) {
   useEffect(() => {
     const velocity = options.velocity || 1;
     const interval = options.interval || 15000;
+    let updateTime = 0;
 
-    const updateTime = setInterval(() => {
-      if (options.start !== undefined) {
-        setTime((t) => {
-          const newTime = new Date(t);
-          newTime.setMilliseconds(t.getMilliseconds() + interval * velocity);
-          return newTime;
-        });
+    const onVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        console.info(`Became visible, starting clock`);
+        updateTime = setInterval(() => {
+          if (options.start !== undefined) {
+            setTime((t) => {
+              const newTime = new Date(t);
+              newTime.setMilliseconds(t.getMilliseconds() + interval * velocity);
+              return newTime;
+            });
+          } else {
+            setTime(new Date());
+          }
+        }, interval);
       } else {
-        setTime(new Date());
+        console.info(`Became hidden, stopping clock`);
+        clearInterval(updateTime);
+        updateTime = 0;
       }
-    }, interval);
+    };
+
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    onVisibilityChange();
 
     return () => {
+      document.removeEventListener("visibilitychange", onVisibilityChange);
       clearInterval(updateTime);
+      updateTime = 0;
     };
-  });
+  }, []);
 
   const timeContext = useMemo(() => {
     return {

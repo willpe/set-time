@@ -434,7 +434,7 @@ section.now {
         right: 0;
         height: 2px;
         background-color: var(--color-teal-100);
-        border-bottom: dashed 2px var(--color-mint-20);
+        border-bottom: dotted 1px var(--color-mint-20);
         opacity: 20%;
 
         z-index: 100;
