@@ -95,6 +95,10 @@ function parseSet(line, date, previousSet) {
   const setMatch = line.match(setPattern);
   if (setMatch) {
     const startTime = parseTime(setMatch[1], date);
+    if (previousSet && startTime.getTime() < previousSet.startTime.getTime()) {
+      startTime.setDate(startTime.getDate() + 1);
+    }
+
     const endTime = parseTime(setMatch[2], date);
 
     if (endTime.getTime() < startTime.getTime()) {
