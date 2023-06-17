@@ -182,7 +182,7 @@
 
 - 17:30-18:45 Dogs in a Pile
 - 19:30-20:45 Opiuo
-- 21:15-10:45 Goose (ASL)
+- 21:15-22:45 Goose (ASL)
 - 23:30-01:00 Above & Beyond (ASL)
 
 ## Sherwood Court

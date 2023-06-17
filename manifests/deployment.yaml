@@ -32,7 +32,7 @@ spec:
         - name: gitlab-registry-token
       containers:
         - name: set-time
-          image: registry.git.willperry.net/set-time/web:0.5.0
+          image: registry.git.willperry.net/set-time/web:0.5.1
           ports:
             - containerPort: 8080
 ---
