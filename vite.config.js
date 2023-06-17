@@ -26,7 +26,7 @@ export default defineConfig({
         background_color: "#05272E",
         display: "standalone",
         scope: "/",
-        start_url: "/explorations-2023",
+        start_url: "/electric-forest-2023",
         name: "setti.me",
         short_name: "setti.me",
         description: "Explore set times for your favorite festivals",
