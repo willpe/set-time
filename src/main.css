@@ -466,7 +466,7 @@ section.now {
         left: 0;
         right: 0;
         height: 2px;
-        background-color: var(--color-teal-100-10);
+        background-color: var(--color-teal-100-15);
 
         z-index: 100;
 
