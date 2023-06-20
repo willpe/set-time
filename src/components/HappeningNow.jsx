@@ -25,11 +25,16 @@ export default function HappeningNow() {
     );
 
   const now = [];
+  const startingSoon = [];
   today.stages.forEach((stage) => {
     stage.sets.forEach((set) => {
       if (isHappeningNow(set.startTime, set.endTime)) {
-        const remainingMinutes = (set.endTime - time) / 1000 / 60;
-        now.push({ stage, set, remainingMinutes });
+        now.push({ stage, set });
+      } else {
+        const startsInMinutes = (set.startTime - time) / 1000 / 60;
+        if (startsInMinutes > 0 && startsInMinutes < 15) {
+          startingSoon.push({ stage, set });
+        }
       }
     });
   });
@@ -46,6 +51,15 @@ export default function HappeningNow() {
       {now.map(({ stage, set }) => (
         <Set key={set.id} set={set} stage={stage} day={today} />
       ))}
+
+      {startingSoon && startingSoon.length > 0 ? (
+        <>
+          <h3>Starting Soon</h3>
+          {startingSoon.map(({ stage, set }) => (
+            <Set key={set.id} set={set} stage={stage} day={today} />
+          ))}
+        </>
+      ) : null}
 
       <footer>
         <Link to="../schedule" className="button">

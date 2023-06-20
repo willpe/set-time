@@ -28,7 +28,7 @@ export default function Set({ set, stage, day }) {
       </div>
       <div className="set-times">
         {set.start} - {set.end}
-        {remainingMinutes < 15 ? <span className="ending-soon"> (ending soon)</span> : null}
+        {isNow && remainingMinutes < 15 ? <span className="ending-soon"> (ending soon)</span> : null}
       </div>
     </div>
   );

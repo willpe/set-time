@@ -118,7 +118,7 @@ main header {
 
 section.day {
   margin-inline: 0;
-  margin-block-end: 2rem;
+  margin-block-end: 1rem;
 
   @media (min-width: 700px) {
     background-color: initial;
@@ -130,7 +130,7 @@ section.day {
     z-index: 100;
     position: sticky;
     top: 0;
-    padding: 0 0.5rem 0.5rem 2.3rem;
+    padding: 0.5rem 0.5rem 0.5rem 2.3rem;
     display: flex;
     align-items: center;
     :first-child {
@@ -221,6 +221,10 @@ section.now {
     margin: 0;
     padding: 0;
 
+    position: sticky;
+    top: 0;
+    background-color: var(--color-bg-primary);
+
     display: flex;
     flex-direction: row;
     align-items: baseline;
@@ -241,8 +245,13 @@ section.now {
     }
   }
 
+  h3 {
+    margin-top: 3rem;
+    text-align: center;
+  }
+
   footer {
-    font-size: 1.5rem;
+    font-size: 1rem;
 
     a.button {
       padding: 0.5rem 1.5rem;
