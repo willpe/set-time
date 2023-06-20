@@ -103,7 +103,11 @@ export default function Day({ day }) {
                 {stage.sets.map((set) => (
                   <Set key={set.id} set={set} stage={stage} day={day} />
                 ))}
-                {isNow ? <div className="current-time" style={{ height: `${currentTimeOffset}%` }}></div> : null}
+                {isNow ? (
+                  <div className="current-time" style={{ height: `${currentTimeOffset}%` }}>
+                    <div className="current-time-line"></div>
+                  </div>
+                ) : null}
               </div>
             ))}
           </div>

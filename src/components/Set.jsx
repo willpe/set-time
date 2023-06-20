@@ -19,7 +19,7 @@ export default function Set({ set, stage, day }) {
     <div
       id={set.id}
       className={`card set ${set.adjacent ? "adjacent" : ""} ${isFavorite ? "favorite" : ""}`}
-      style={{ gridRow: `${5 + start * 4} / span ${duration * 4}` }}
+      style={{ gridRow: `${5 + Math.floor(start * 4)} / span ${Math.ceil(duration * 4)}` }}
       onClick={() => festivalContext.setFavorite(day.id, stage.id, set.id)}
     >
       <div className="set-stage">{stage.name}</div>

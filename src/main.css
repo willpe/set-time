@@ -411,7 +411,7 @@ section.now {
         }
 
         .b2b {
-          display: block;
+          display: inline;
         }
       }
 
@@ -432,14 +432,23 @@ section.now {
 
       .current-time {
         position: absolute;
+        align-items: flex-end;
         top: calc(4 * var(--row-height));
         left: 0;
         right: 0;
         height: 2px;
         background-color: var(--color-teal-100-10);
-        border-bottom: dotted 1px var(--color-mint-20);
 
         z-index: 100;
+
+        .current-time-line {
+          position: absolute;
+          bottom: 0px;
+          left: 0px;
+          right: 0px;
+          height: 1px;
+          border-bottom: dotted 1px var(--color-mint-20);
+        }
       }
     }
   }
