@@ -2,12 +2,10 @@ import { useState, useContext } from "react";
 import { useLoaderData } from "react-router";
 
 import { parse } from "../Parser";
-import { Outlet, Navigate } from "react-router-dom";
+import { Outlet, Navigate, NavLink } from "react-router-dom";
 
 import { FestivalContext } from "../contexts/FestivalContext";
 import { TimeContext } from "../contexts/TimeContext";
-
-import Schedule from "../components/Schedule";
 
 export async function loader({ params }) {
   const result = await fetch(`/schedules/${params.festivalId}/festival.json`);
@@ -44,6 +42,9 @@ export function FestivalIndex() {
 
 export default function Festival() {
   const { festival } = useLoaderData();
+  const { isHappeningNow } = useContext(TimeContext);
+  const isNow = !!festival.schedule.days.find((day) => isHappeningNow(day.opens, day.closes));
+
   const storedFavorites = localStorage.getItem(`favorites-${festival.id}`)?.split(",") || [];
 
   const [favorites, setFavorites] = useState(storedFavorites);
@@ -80,12 +81,11 @@ export default function Festival() {
       <main>
         <header>
           <h1 data-id={festival.id}>{festival.name}</h1>
-          <aside>
-            <p>{festival.location.name}</p>
-            <p className="text-alt">
-              {festival.startDate} - {festival.endDate}
-            </p>
-          </aside>
+          <nav>
+            <NavLink to="./schedule">Schedule</NavLink>
+            {isNow ? <NavLink to="./now">Now Playing</NavLink> : null}
+            <NavLink to="./starred">Starred</NavLink>
+          </nav>
         </header>
         <Outlet />
       </main>

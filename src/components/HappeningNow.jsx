@@ -13,14 +13,10 @@ export default function HappeningNow() {
   if (!today)
     return (
       <div className="nothing-happening">
-        <h2>Nothing is happening right now.</h2>
+        <h2>It's pretty quiet right now.</h2>
         <div>
-          <small className="muted">It's {time.toLocaleString()}</small>
+          <small className="muted">Come back when the festival starts to see what's going on at each stage.</small>
         </div>
-
-        <Link to="../schedule" className="button">
-          Full Schedule
-        </Link>
       </div>
     );
 
@@ -60,12 +56,6 @@ export default function HappeningNow() {
           ))}
         </>
       ) : null}
-
-      <footer>
-        <Link to="../schedule" className="button">
-          Full Schedule
-        </Link>
-      </footer>
     </section>
   );
 }

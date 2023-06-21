@@ -14,6 +14,12 @@ export default function useTime(options) {
       return;
     }
 
+    const starredSetNow = document.getElementsByClassName("starred-set-now");
+    if (starredSetNow && starredSetNow.length > 0) {
+      starredSetNow[0].scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+      return;
+    }
+
     const nowSection = document.getElementsByClassName("now");
     if (nowSection && nowSection.length > 0) {
       nowSection[0].scrollIntoView({ behavior: "smooth", block: "start", inline: "center" });

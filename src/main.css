@@ -1,3 +1,9 @@
+main {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
 main.list {
   flex-grow: 1;
 
@@ -83,6 +89,50 @@ main header {
   flex-direction: column;
   align-items: flex-start;
   background-color: initial;
+
+  nav {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    border: none;
+
+    a {
+      font-weight: 500;
+      color: var(--color-mint-100);
+      border-bottom: solid 2px transparent;
+
+      &.active {
+        color: var(--color-mint-60);
+        border-bottom: solid 2px var(--color-mint-100);
+      }
+    }
+
+    @media (max-width: 700px) {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 0.5rem;
+      z-index: 1000;
+
+      box-shadow: 0 -2px 16px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+
+      border-top: solid 1px var(--color-teal-80);
+      background-color: var(--color-teal-100-90);
+      justify-content: space-between;
+
+      a {
+        padding: 0.5rem;
+
+        color: var(--color-teal-20);
+
+        font-size: 0.6 rem;
+        font-weight: 400;
+      }
+    }
+  }
 
   aside {
     flex-direction: row;
@@ -227,8 +277,74 @@ nav.festival-list {
   align-items: center;
   justify-content: center;
   text-align: center;
-  gap: 3rem;
-  padding: 4em;
+  gap: 2rem;
+  padding: 5em;
+
+  small {
+    color: var(--color-teal-60);
+    font-size: 1rem;
+  }
+}
+
+.starred-sets {
+  .day {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    header {
+      padding: 0;
+    }
+  }
+
+  .starred-set-card {
+    background-color: var(--color-teal-100);
+    padding: 0.5rem;
+    .set-performance {
+      color: var(--color-mint-80);
+      margin-block: 0 0.25rem;
+      font-size: 1.2rem;
+      font-weight: 400;
+    }
+
+    div {
+      margin-block: 0;
+      font-size: 1rem;
+      font-weight: 400;
+
+      &.set-stage {
+        color: var(--color-teal-20);
+      }
+
+      &.set-times {
+        color: var(--color-teal-40);
+      }
+    }
+
+    &.starred-set-now {
+      background: var(--card-bg-emphasis);
+      .set-performance {
+        color: var(--color-mint-40);
+        font-weight: 500;
+      }
+
+      div {
+        &.set-stage {
+          color: var(--color-mint-20);
+        }
+
+        &.set-times {
+          color: var(--color-mint-20);
+        }
+      }
+    }
+  }
+
+  .nothing-here {
+    padding-inline: 0.5rem;
+    color: var(--color-teal-60);
+    font-size: 1rem;
+  }
 }
 
 section.now {

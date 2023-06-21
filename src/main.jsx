@@ -11,6 +11,7 @@ import Index, { loader as indexLoader } from "./routes/index.jsx";
 import Profile from "./routes/profile.jsx";
 import Schedule from "./components/Schedule.jsx";
 import HappeningNow from "./components/HappeningNow.jsx";
+import StarredSets from "./components/StarredSets.jsx";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,7 @@ const router = createBrowserRouter([
           { index: true, element: <FestivalIndex />, loader: festivalLoader },
           { path: "schedule", element: <Schedule /> },
           { path: "now", element: <HappeningNow /> },
+          { path: "starred", element: <StarredSets /> },
         ],
       },
     ],

@@ -16,6 +16,7 @@
   --color-teal-80: #144a52;
   --color-teal-100: #05272e;
   --color-teal-100-15: rgb(5, 39, 46, 0.15);
+  --color-teal-100-90: rgb(5, 39, 46, 0.9);
 
   --color-border-teal-60: #366363;
 
@@ -79,7 +80,10 @@ a {
   color: var(--color-mint-100);
   text-decoration: inherit;
 }
-a:hover {
+
+a:hover,
+a:active,
+a:focus {
   color: var(--color-mint-60);
 }
 
@@ -155,7 +159,7 @@ a.button {
 }
 
 footer {
-  margin-block: 2rem;
+  margin-block: 3rem 1.5rem;
   color: var(--color-text-muted);
   font-size: 0.7rem;
 
