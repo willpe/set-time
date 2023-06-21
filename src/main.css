@@ -123,6 +123,12 @@ main header {
       background-color: var(--color-teal-100-90);
       justify-content: space-between;
 
+      @supports (-webkit-overflow-scrolling: touch) {
+        @media (display-mode: standalone) {
+          padding: 0.5rem 1rem 2rem 1rem;
+        }
+      }
+
       a {
         padding: 0.5rem;
 
@@ -344,6 +350,10 @@ nav.festival-list {
     padding-inline: 0.5rem;
     color: var(--color-teal-60);
     font-size: 1rem;
+
+    @media (min-width: 700px) {
+      text-align: center;
+    }
   }
 }
 

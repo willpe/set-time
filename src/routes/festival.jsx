@@ -84,7 +84,7 @@ export default function Festival() {
           <nav>
             <NavLink to="./schedule">Schedule</NavLink>
             {isNow ? <NavLink to="./now">Now Playing</NavLink> : null}
-            <NavLink to="./starred">Starred</NavLink>
+            <NavLink to="./starred">Saved Sets</NavLink>
           </nav>
         </header>
         <Outlet />
