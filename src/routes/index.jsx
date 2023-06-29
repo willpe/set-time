@@ -4,12 +4,12 @@ export async function loader() {
   return {
     festivals: [
       {
-        name: "Electric Forest 2023",
-        id: "electric-forest-2023",
-        startDate: "June 22, 2023",
-        endDate: "June 25, 2023",
+        name: "Group Therapy Weekender",
+        id: "gtw-2023",
+        startDate: "July 21, 2023",
+        endDate: "July 23, 2023",
         location: {
-          name: "Rothbury, MI",
+          name: "The Gorge Amphitheatre",
         },
       },
       {
@@ -19,6 +19,15 @@ export async function loader() {
         endDate: "July 2, 2023",
         location: {
           name: "Washington",
+        },
+      },
+      {
+        name: "Electric Forest 2023",
+        id: "electric-forest-2023",
+        startDate: "June 22, 2023",
+        endDate: "June 25, 2023",
+        location: {
+          name: "Rothbury, MI",
         },
       },
       {
