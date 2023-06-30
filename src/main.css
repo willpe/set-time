@@ -536,7 +536,7 @@ section.now {
       .set {
         margin: 0;
         padding: calc(1.5 * var(--row-height));
-        font-size: calc(4.2 * var(--row-height));
+        font-size: calc(5 * var(--row-height));
         z-index: 50;
         grid-column: 1;
 
@@ -545,7 +545,7 @@ section.now {
         flex-direction: row;
 
         @media (min-width: 700px) {
-          font-size: calc(6 * var(--row-height));
+          font-size: calc(5 * var(--row-height));
         }
 
         .set-stage,
@@ -563,7 +563,7 @@ section.now {
         }
 
         .notes {
-          display: block;
+          display: inline;
         }
 
         .b2b {
@@ -593,7 +593,7 @@ section.now {
         left: 0;
         right: 0;
         height: 2px;
-        background-color: var(--color-teal-100-15);
+        background-color: var(--color-teal-100-20);
 
         z-index: 100;
 
