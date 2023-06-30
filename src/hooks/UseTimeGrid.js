@@ -42,7 +42,7 @@ export default function useTimeGrid(day) {
       // Compute the offset from the start of the grid
       const now = time - gridStartTime;
       const ratio = now / (durationMins * 60 * 1000);
-      const offset = 30;
+      const offset = 40;
       const adjustment = durationMins / (gridDurationMins + offset);
 
       // Calculate the current percentage through the day

@@ -16,7 +16,7 @@
   --color-teal-80: #144a52;
   --color-teal-100: #05272e;
   --color-teal-100-15: rgb(5, 39, 46, 0.15);
-  --color-teal-100-20: rgb(5, 39, 46, 0.2);
+  --color-teal-100-40: rgb(5, 39, 46, 0.4);
   --color-teal-100-90: rgb(5, 39, 46, 0.9);
 
   --color-border-teal-60: #366363;
@@ -39,7 +39,7 @@
   --card-bg-emphasis: linear-gradient(var(--color-teal-50), var(--color-teal-40));
   --card-bg-emphasis-alt: linear-gradient(var(--color-teal-60), var(--color-teal-50));
 
-  --row-height: 0.15rem;
+  --row-height: 0.2rem;
 
   --font-family: Poppins, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   --font-size: 1rem;
@@ -47,6 +47,7 @@
   font-family: var(--font-family);
   line-height: 1.5;
   font-weight: 400;
+  font-size: 16px;
 
   color-scheme: light dark;
   color: var(--color-text-primary);

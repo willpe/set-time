@@ -29,7 +29,7 @@ export default function Day({ day }) {
     const content = [];
     timeGrid.forEachHour((startRow, startTime) => {
       content.push(
-        <div key={startRow} style={{ gridRowStart: startRow - 2 }}>
+        <div key={startRow} style={{ gridRowStart: startRow - 3 }}>
           {timeGrid.toTimeString(startTime)}
         </div>
       );

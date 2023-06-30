@@ -236,7 +236,7 @@ nav.festival-list {
 
 .card {
   background: var(--card-bg);
-  transition: background 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
 
   vertical-align: middle;
   text-align: center;
@@ -440,26 +440,21 @@ section.now {
 }
 
 .timeline {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
 
   .times {
-    width: 2.7em;
+    width: 2.5rem;
     text-align: center;
 
     display: grid;
     grid-auto-rows: var(--row-height);
 
-    @media (min-width: 700px) {
-      width: 5.7em;
-      grid-auto-rows: calc(1.5 * var(--row-height));
-    }
-
     div {
       grid-row-end: span 1;
       padding: 0 0.2rem;
 
-      font-size: calc(4 * var(--row-height));
+      font-size: calc(3 * var(--row-height));
       font-weight: 600;
       vertical-align: middle;
       line-height: calc(6 * var(--row-height));
@@ -503,11 +498,7 @@ section.now {
       grid-auto-rows: var(--row-height);
 
       &.single-stage {
-        width: calc(100cqw - (24 * var(--row-height)));
-      }
-
-      @media (min-width: 700px) {
-        grid-auto-rows: calc(1.5 * var(--row-height));
+        width: calc(100cqw - (18 * var(--row-height)));
       }
 
       .gridlines {
@@ -521,10 +512,6 @@ section.now {
         display: grid;
         grid-auto-rows: var(--row-height);
 
-        @media (min-width: 700px) {
-          grid-auto-rows: calc(1.5 * var(--row-height));
-        }
-
         div {
           display: flex;
           grid-column: 1;
@@ -536,7 +523,7 @@ section.now {
       .set {
         margin: 0;
         padding: calc(1.5 * var(--row-height));
-        font-size: calc(5 * var(--row-height));
+        font-size: calc(4 * var(--row-height));
         z-index: 50;
         grid-column: 1;
 
@@ -545,7 +532,7 @@ section.now {
         flex-direction: row;
 
         @media (min-width: 700px) {
-          font-size: calc(5 * var(--row-height));
+          font-size: calc(3.5 * var(--row-height));
         }
 
         .set-stage,
@@ -589,11 +576,11 @@ section.now {
       .current-time {
         position: absolute;
         align-items: flex-end;
-        top: calc(18 * var(--row-height));
+        top: calc(10 * var(--row-height));
         left: 0;
         right: 0;
         height: 2px;
-        background-color: var(--color-teal-100-20);
+        background-color: var(--color-teal-100-40);
 
         z-index: 100;
 
