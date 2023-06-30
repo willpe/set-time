@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import { FestivalContext } from "../contexts/FestivalContext";
 import { TimeContext } from "../contexts/TimeContext";
+import useTimeGrid from "../hooks/UseTimeGrid";
 
 import Set from "./Set";
-import { Link } from "react-router-dom";
 
 export default function HappeningNow() {
   const { festival } = useContext(FestivalContext);
@@ -20,6 +20,7 @@ export default function HappeningNow() {
       </div>
     );
 
+  const timeGrid = useTimeGrid(today);
   const now = [];
   const startingSoon = [];
   today.stages.forEach((stage) => {
@@ -45,7 +46,7 @@ export default function HappeningNow() {
       </header>
 
       {now.map(({ stage, set }) => (
-        <Set key={set.id} set={set} stage={stage} day={today} />
+        <Set key={set.id} timeGrid={timeGrid} set={set} stage={stage} day={today} />
       ))}
 
       {startingSoon && startingSoon.length > 0 ? (

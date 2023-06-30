@@ -4,7 +4,7 @@ import { TimeContext } from "../contexts/TimeContext";
 
 import Performance from "./Performance";
 
-export default function Set({ set, stage, day }) {
+export default function Set({ timeGrid, set, stage, day }) {
   let duration = (set.endTime - set.startTime) / 1000 / 60 / 60;
   let start = (set.startTime - day.opens) / 1000 / 60 / 60;
 
@@ -15,11 +15,13 @@ export default function Set({ set, stage, day }) {
   const isNow = timeContext.isHappeningNow(set.startTime, set.endTime);
   const remainingMinutes = isNow ? (set.endTime - timeContext.time) / 1000 / 60 : null;
 
+  const [startRow, endRow, span] = timeGrid.calculateGridRowSpan(set.startTime, set.endTime);
+
   return (
     <div
       id={set.id}
       className={`card set ${set.adjacent ? "adjacent" : ""} ${isFavorite ? "favorite" : ""}`}
-      style={{ gridRow: `${5 + Math.floor(start * 4)} / span ${Math.ceil(duration * 4)}` }}
+      style={{ gridRow: `${startRow} / span ${span}` }}
       onClick={() => festivalContext.setFavorite(day.id, stage.id, set.id)}
     >
       <div className="set-stage">{stage.name}</div>

@@ -38,9 +38,10 @@
   --card-bg-emphasis: linear-gradient(var(--color-teal-50), var(--color-teal-40));
   --card-bg-emphasis-alt: linear-gradient(var(--color-teal-60), var(--color-teal-50));
 
-  --row-height: 0.5rem;
+  --row-height: 0.15rem;
 
   --font-family: Poppins, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --font-size: 1rem;
 
   font-family: var(--font-family);
   line-height: 1.5;
@@ -114,14 +115,14 @@ h1 {
 }
 
 h2 {
-  font-size: 1.5em;
+  font-size: 1.5rem;
   font-weight: 400;
   line-height: 1.1;
   margin-block: 1rem 0.5rem;
 }
 
 h3 {
-  font-size: 1em;
+  font-size: 1rem;
   line-height: 0.8;
   font-weight: 600;
 }

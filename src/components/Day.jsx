@@ -1,83 +1,57 @@
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { TimeContext } from "../contexts/TimeContext";
 
 import Set from "./Set";
-
-function TimeScale({ start, end }) {
-  let hour = start.getHours();
-  let duration = Math.floor((end - start) / 1000 / 60 / 60);
-
-  const content = [];
-  for (let i = 0; i <= duration; i++) {
-    const rowStart = 4 * (i + 1);
-    content.push(
-      <div key={rowStart} style={{ gridRowStart: rowStart }}>
-        {hour < 10 ? "0" : null}
-        {hour}:00
-      </div>
-    );
-
-    hour = (hour + 1) % 24;
-  }
-
-  // Fill out the grid for the last hour
-  content.push(<div key="final" style={{ gridRowStart: 4 * (duration + 2) - 1 }} />);
-
-  return (
-    <div
-      className="times"
-      data-range={`from ${start.getHours()} to ${(start.getHours() + duration) % 24} (${duration} hrs)`}
-    >
-      {content}
-    </div>
-  );
-}
-
-function GridLines({ start, end }) {
-  let hour = start.getHours();
-  let duration = Math.floor((end - start) / 1000 / 60 / 60);
-
-  const content = [];
-  for (let i = 0; i < duration + 2; i++) {
-    const rowStart = 4 * i + 1;
-    content.push(<div data-hour={hour + i} key={rowStart} style={{ gridRowStart: rowStart }}></div>);
-
-    hour = (hour + 1) % 24;
-  }
-
-  return (
-    <div
-      className="gridlines"
-      data-range={`from ${start.getHours()} to ${(start.getHours() + duration) % 24} (${duration} hrs)`}
-    >
-      {content}
-    </div>
-  );
-}
-
-// Compute where to show the current time indicator
-function calculateCurrentTimeLinePosition(currentTime, startTime, endTime) {
-  // Compute the time the grid ebd,
-  // adjusting for the footer to the next whole hour
-  const end = new Date(endTime);
-  end.setMinutes(0);
-  end.setHours(end.getHours() + 1);
-
-  // Compute the offset from the start of the grid
-  const now = currentTime - startTime;
-
-  // Compute the length of the grid
-  const duration = end - startTime;
-
-  // Calculate the current percentage through the day
-  return Math.round((100 * now) / duration);
-}
+import useTimeGrid from "../hooks/UseTimeGrid";
 
 export default function Day({ day }) {
   const { time, isHappeningNow } = useContext(TimeContext);
   const isNow = isHappeningNow(day.opens, day.closes);
-  const currentTimeOffset = isNow ? calculateCurrentTimeLinePosition(time, day.opens, day.closes) : null;
+
+  const timeGrid = useTimeGrid(day);
+  const currentTimeOffset = timeGrid.getCurrentTimeLinePosition(time, day.opens, day.closes);
+
+  function GridLines() {
+    const content = [];
+    timeGrid.forEachHour((startRow, startTime) => {
+      content.push(<div data-hour={startTime.getHours()} key={startRow} style={{ gridRowStart: startRow }}></div>);
+    });
+
+    return (
+      <div
+        className="gridlines"
+        data-range={`from ${timeGrid.startTimeString} to ${timeGrid.endTimeString} (${timeGrid.duration} hrs)`}
+      >
+        {content}
+      </div>
+    );
+  }
+
+  function TimeScale() {
+    const content = [];
+    timeGrid.forEachHour((startRow, startTime) => {
+      content.push(
+        <div key={startRow} style={{ gridRowStart: startRow - 2 }}>
+          {timeGrid.toTimeString(startTime)}
+        </div>
+      );
+    });
+
+    // Fill out the grid for the last hour
+    content.push(<div key="final" style={{ gridRowStart: timeGrid.rows - 1 }} />);
+
+    return (
+      <div
+        className="times"
+        data-range={`from ${timeGrid.startTimeString} to ${timeGrid.endTimeString} (${timeGrid.duration} hrs)`}
+      >
+        {content}
+      </div>
+    );
+  }
+
+  const singleStage = day.stages.length === 1;
 
   return (
     <section className="day" key={day.id} data-id={day.id}>
@@ -97,11 +71,11 @@ export default function Day({ day }) {
         <div className="grid">
           <div className="stages">
             {day.stages.map((stage) => (
-              <div key={stage.id} className="stage" data-id={stage.id}>
+              <div key={stage.id} className={`stage ${singleStage ? "single-stage" : ""}`} data-id={stage.id}>
                 <GridLines start={day.opens} end={day.closes} />
                 <h3>{stage.name}</h3>
                 {stage.sets.map((set) => (
-                  <Set key={set.id} set={set} stage={stage} day={day} />
+                  <Set key={set.id} timeGrid={timeGrid} set={set} stage={stage} day={day} />
                 ))}
                 {isNow ? (
                   <div className="current-time" style={{ height: `${currentTimeOffset}%` }}>

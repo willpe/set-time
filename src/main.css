@@ -165,10 +165,6 @@ main header {
       }
     }
   }
-
-  @media (min-width: 700px) and (min-height: 600px) {
-    /* margin-block: 2rem; */
-  }
 }
 
 section.day {
@@ -220,6 +216,7 @@ nav.festival-list {
       margin-block: 0 2rem;
       font-size: 2rem;
       font-weight: 400;
+      line-height: 1;
     }
     p {
       margin-block: 0;
@@ -447,24 +444,25 @@ section.now {
   flex-direction: row;
 
   .times {
-    width: 2.3rem;
+    width: 2.7em;
     text-align: center;
 
     display: grid;
     grid-auto-rows: var(--row-height);
 
-    @media (min-width: 700px) and (max-width: 800px) {
+    @media (min-width: 700px) {
+      width: 5.7em;
       grid-auto-rows: calc(1.5 * var(--row-height));
     }
 
     div {
-      grid-row-end: span 2;
+      grid-row-end: span 1;
       padding: 0 0.2rem;
 
-      font-size: calc(1.3 * var(--row-height));
+      font-size: calc(4 * var(--row-height));
       font-weight: 600;
       vertical-align: middle;
-      line-height: calc(2 * var(--row-height));
+      line-height: calc(6 * var(--row-height));
       color: var(--color-teal-20);
     }
   }
@@ -494,17 +492,21 @@ section.now {
     }
 
     .stage {
-      width: calc(100cqw - (10 * var(--row-height)));
-      margin: 0 var(--row-height);
+      width: calc(100cqw - (30 * var(--row-height)));
+      margin: 0 calc(3 * var(--row-height));
 
       scroll-behavior: smooth;
       scroll-snap-align: center;
-      scroll-margin-block: var(--row-height);
+      scroll-margin-block: calc(3 * var(--row-height));
 
       display: grid;
       grid-auto-rows: var(--row-height);
 
-      @media (min-width: 700px) and (max-width: 800px) {
+      &.single-stage {
+        width: calc(100cqw - (24 * var(--row-height)));
+      }
+
+      @media (min-width: 700px) {
         grid-auto-rows: calc(1.5 * var(--row-height));
       }
 
@@ -519,7 +521,7 @@ section.now {
         display: grid;
         grid-auto-rows: var(--row-height);
 
-        @media (min-width: 700px) and (max-width: 800px) {
+        @media (min-width: 700px) {
           grid-auto-rows: calc(1.5 * var(--row-height));
         }
 
@@ -528,24 +530,23 @@ section.now {
           grid-column: 1;
           grid-row: auto / span 4;
           border-top: solid 1px var(--color-border-teal-60);
-          &:first-child {
-            border-top: none;
-          }
         }
       }
 
       .set {
         margin: 0;
-        padding: calc(0.5 * var(--row-height));
-        font-size: calc(1.6 * var(--row-height));
+        padding: calc(1.5 * var(--row-height));
+        font-size: calc(4.2 * var(--row-height));
         z-index: 50;
         grid-column: 1;
 
         line-height: 110%;
-
         gap: 0;
-
         flex-direction: row;
+
+        @media (min-width: 700px) {
+          font-size: calc(6 * var(--row-height));
+        }
 
         .set-stage,
         .set-times {
@@ -571,7 +572,7 @@ section.now {
       }
 
       h3 {
-        grid-row: 1 / span 4;
+        grid-row: 1 / span 12;
         grid-column: 1;
         margin: 0;
         padding: 0;
@@ -588,7 +589,7 @@ section.now {
       .current-time {
         position: absolute;
         align-items: flex-end;
-        top: calc(4 * var(--row-height));
+        top: calc(12 * var(--row-height));
         left: 0;
         right: 0;
         height: 2px;

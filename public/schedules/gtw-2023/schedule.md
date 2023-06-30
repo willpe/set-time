@@ -25,7 +25,7 @@
 - 15:30-17:00 Avenue One
 - 17:00-18:30 Leena Punks
 - 18:30-20:00 Nourey
-- 20:00-21:00 Alex Sonata & TheRio
+- 20:00-21:30 Alex Sonata & TheRio
 
 # Sunday July 23, 2023
 
