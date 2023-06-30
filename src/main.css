@@ -589,7 +589,7 @@ section.now {
       .current-time {
         position: absolute;
         align-items: flex-end;
-        top: calc(12 * var(--row-height));
+        top: calc(18 * var(--row-height));
         left: 0;
         right: 0;
         height: 2px;

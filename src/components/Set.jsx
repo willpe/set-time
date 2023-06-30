@@ -5,9 +5,6 @@ import { TimeContext } from "../contexts/TimeContext";
 import Performance from "./Performance";
 
 export default function Set({ timeGrid, set, stage, day }) {
-  let duration = (set.endTime - set.startTime) / 1000 / 60 / 60;
-  let start = (set.startTime - day.opens) / 1000 / 60 / 60;
-
   const festivalContext = useContext(FestivalContext);
   const isFavorite = festivalContext.isFavorite(day.id, stage.id, set.id);
 

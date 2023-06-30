@@ -19,10 +19,7 @@ export default function Day({ day }) {
     });
 
     return (
-      <div
-        className="gridlines"
-        data-range={`from ${timeGrid.startTimeString} to ${timeGrid.endTimeString} (${timeGrid.duration} hrs)`}
-      >
+      <div className="gridlines" data-range={`from ${timeGrid.startTimeString} to ${timeGrid.endTimeString}`}>
         {content}
       </div>
     );
@@ -42,10 +39,7 @@ export default function Day({ day }) {
     content.push(<div key="final" style={{ gridRowStart: timeGrid.rows - 1 }} />);
 
     return (
-      <div
-        className="times"
-        data-range={`from ${timeGrid.startTimeString} to ${timeGrid.endTimeString} (${timeGrid.duration} hrs)`}
-      >
+      <div className="times" data-range={`from ${timeGrid.startTimeString} to ${timeGrid.endTimeString}`}>
         {content}
       </div>
     );

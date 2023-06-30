@@ -17,8 +17,8 @@ export default function useTimeGrid(day) {
     gridEndTime.setHours(gridEndTime.getHours() + 1);
     gridEndTime.setMinutes(0);
 
-    const duration = (gridEndTime - gridStartTime) / 1000 / 60 / 60;
-    const rows = (duration * 60) / minutesPerRow + headerRows;
+    const gridDurationMins = (gridEndTime - gridStartTime) / 1000 / 60;
+    const rows = gridDurationMins / minutesPerRow + headerRows;
 
     function calculateGridRowSpan(startTime, endTime) {
       const minutesSinceStart = (startTime - gridStartTime) / 1000 / 60;
@@ -36,11 +36,17 @@ export default function useTimeGrid(day) {
         return null;
       }
 
+      // Calculate the duration of the day in minutes
+      const durationMins = (day.closes - day.opens) / 1000 / 60;
+
       // Compute the offset from the start of the grid
       const now = time - gridStartTime;
+      const ratio = now / (durationMins * 60 * 1000);
+      const offset = 30;
+      const adjustment = durationMins / (gridDurationMins + offset);
 
       // Calculate the current percentage through the day
-      return Math.round((100 * now) / (duration * 1000 * 60 * 60));
+      return Math.round(100 * adjustment * ratio);
     }
 
     function forEachHour(callback) {
@@ -66,7 +72,6 @@ export default function useTimeGrid(day) {
       startTimeString: gridStartTime.toLocaleTimeString(["en-us"], shortTimeStringOptions),
       endTime: gridEndTime,
       endTimeString: gridEndTime.toLocaleTimeString(["en-us"], shortTimeStringOptions),
-      duration,
       rows,
       calculateGridRowSpan,
       getCurrentTimeLinePosition,
