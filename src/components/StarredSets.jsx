@@ -61,7 +61,7 @@ export default function StarredSets() {
         </header>
         {favorites.length === 0 ? (
           <div className="nothing-here">
-            <small className="muted">You haven't starred any sets for {day.name} yet</small>
+            <small className="muted">You haven't saved any sets for {day.name} yet.</small>
           </div>
         ) : (
           favorites.map(({ day, stage, set }) => starredSet(day, stage, set))
