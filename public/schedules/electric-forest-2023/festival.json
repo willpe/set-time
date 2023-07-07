@@ -1,9 +1,11 @@
 {
-  "name": "Anjunadeep Open Air",
-  "startDate": "July 7, 2023",
-  "endDate": "June 7, 2023",
+  "name": "Electric Forest",
+  "startDate": "June 22, 2023",
+  "endDate": "June 25, 2023",
   "location": {
-    "name": "New York City",
-    "address": "The Brooklyn Mirage"
-  }
+    "name": "Rothbury, MI",
+    "address": "Rothbury, MI"
+  },
+  "website": "https://www.electricforest.com/",
+  "tickets": "https://www.electricforest.com/pass-types/"
 }
