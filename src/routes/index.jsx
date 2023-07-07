@@ -4,6 +4,14 @@ export async function loader() {
   return {
     festivals: [
       {
+        name: "Anjunadeep Open Air",
+        startDate: "July 7, 2023",
+        endDate: "June 7, 2023",
+        location: {
+          name: "New York City",
+        }
+      },
+      {
         name: "Group Therapy Weekender",
         id: "gtw-2023",
         startDate: "July 21, 2023",
