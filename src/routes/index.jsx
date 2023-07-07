@@ -5,6 +5,7 @@ export async function loader() {
     festivals: [
       {
         name: "Anjunadeep Open Air",
+        id: "openair-nyc-2023",
         startDate: "July 7, 2023",
         endDate: "June 7, 2023",
         location: {
