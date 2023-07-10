@@ -18,7 +18,7 @@
 - 19:30-20:30 ilan Bluestone
 - 20:45-21:45 Kasablanca
 - 22:00-00:00 Above & Beyond
-- 00:00-01:00 Andrew Bayer b2b Mat Zo
+- 00:00-01:00 Andrew Bayer
 
 ## The Meadow
 
