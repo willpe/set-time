@@ -1,3 +1,19 @@
+# Thursday July 20, 2023
+
+## Ora Upstairs
+- 21:00-22:40 Amy Wiles (Warm Up Party)
+- 22:40-00:20 TBD (Warm Up Party)
+- 00:20-02:00 Andrew Bayer (Warm Up Party)
+
+## Ora Front Room
+- 21:00-00:00 Alex Sonata & TheRio (Warm Up Party)
+- 00:00-02:00 anamē (Warm Up Party)
+
+## Ora Back Room
+- 21:00-22:30 Adrian Alexander (Warm Up Party)
+- 22:30-00:00 Elevven (Warm Up Party)
+- 00:00-02:00 Avenue One (Warm Up Party)
+
 # Friday July 21, 2023
 
 ## The Meadow
