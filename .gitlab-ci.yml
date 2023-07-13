@@ -4,12 +4,17 @@ variables:
 
 stages:
   - build
-  - push
+  - publish
 
 Build:
   stage: build
   tags:
     - docker
+  rules:
+    - if: $CI_COMMIT_AUTHOR =~ /^fluxcdbot /
+      when: never
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
   before_script:
     # docker login asks for the password to be passed through stdin for security
     # we use $CI_REGISTRY_PASSWORD here which is a special variable provided by GitLab
@@ -34,19 +39,27 @@ Build:
       --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
       .
     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
+    # Tag it as a CI image
+    - export NODE_PACKAGE_VERSION=`jq -r ".version" package.json`
+    - echo $CI_REGISTRY_IMAGE:$NODE_PACKAGE_VERSION-ci.$CI_PIPELINE_ID
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA $CI_REGISTRY_IMAGE:$NODE_PACKAGE_VERSION-ci.$CI_PIPELINE_ID
+    - docker push $CI_REGISTRY_IMAGE:$NODE_PACKAGE_VERSION-ci.$CI_PIPELINE_ID
+    - echo $CI_REGISTRY_IMAGE:$NODE_PACKAGE_VERSION-ci
+    - docker tag $CI_REGISTRY_IMAGE:$NODE_PACKAGE_VERSION-ci.$CI_PIPELINE_ID $CI_REGISTRY_IMAGE:$NODE_PACKAGE_VERSION-ci
+    - docker push $CI_REGISTRY_IMAGE:$NODE_PACKAGE_VERSION-ci
 
-# Here, the goal is to tag the "main" branch as "latest"
-Push latest:
+# Tag the "main" branch as "latest"
+Publish Latest:
   variables:
-    # We are just playing with Docker here.
     # We do not need GitLab to clone the source code.
     GIT_STRATEGY: none
-  stage: push
+  stage: publish
   tags:
     - docker
-  only:
-    # Only "master" should be tagged "latest"
-    - main
+  rules:
+    - if: $CI_COMMIT_AUTHOR =~ /^fluxcdbot /
+      when: never
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   before_script:
     # docker login asks for the password to be passed through stdin for security
     # we use $CI_REGISTRY_PASSWORD here which is a special variable provided by GitLab
@@ -58,27 +71,55 @@ Push latest:
     - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
     # Then we tag it "latest"
     - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA $CI_REGISTRY_IMAGE:latest
-    # Annnd we push it.
+    # And we push it.
     - docker push $CI_REGISTRY_IMAGE:latest
 
-# Finally, the goal here is to Docker tag any Git tag
-# GitLab will start a new pipeline everytime a Git tag is created, which is pretty awesome
-Push tag:
-  variables:
-    # Again, we do not need the source code here. Just playing with Docker.
-    GIT_STRATEGY: none
-  stage: push
+# Tag an image as preview
+Publish Preview:
+  stage: publish
   tags:
     - docker
-  only:
-    # We want this job to be run on tags only.
-    - tags
+  rules:
+    - if: $CI_COMMIT_AUTHOR =~ /^fluxcdbot /
+      when: never
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: manual
   before_script:
     # docker login asks for the password to be passed through stdin for security
     # we use $CI_REGISTRY_PASSWORD here which is a special variable provided by GitLab
     # https://docs.gitlab.com/ce/ci/variables/predefined_variables.html
     - echo -n $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
   script:
+    - export NODE_PACKAGE_VERSION=`jq -r ".version" package.json`
     - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
-    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
-    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+    # Tag it as a preview image
+    - export NODE_PACKAGE_VERSION=`jq -r ".version" package.json`
+    - echo $CI_REGISTRY_IMAGE:$NODE_PACKAGE_VERSION-preview.$CI_PIPELINE_ID
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA $CI_REGISTRY_IMAGE:$NODE_PACKAGE_VERSION-preview.$CI_PIPELINE_ID
+    - docker push $CI_REGISTRY_IMAGE:$NODE_PACKAGE_VERSION-preview.$CI_PIPELINE_ID
+    - echo $CI_REGISTRY_IMAGE:$NODE_PACKAGE_VERSION-preview
+    - docker tag $CI_REGISTRY_IMAGE:$NODE_PACKAGE_VERSION-preview.$CI_PIPELINE_ID $CI_REGISTRY_IMAGE:$NODE_PACKAGE_VERSION-preview
+    - docker push $CI_REGISTRY_IMAGE:$NODE_PACKAGE_VERSION-preview
+
+# Add a Docker tag for any Git tag
+Publish Release:
+  stage: publish
+  tags:
+    - docker
+  rules:
+    - if: $CI_COMMIT_AUTHOR =~ /^fluxcdbot /
+      when: never
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: manual
+  before_script:
+    # docker login asks for the password to be passed through stdin for security
+    # we use $CI_REGISTRY_PASSWORD here which is a special variable provided by GitLab
+    # https://docs.gitlab.com/ce/ci/variables/predefined_variables.html
+    - echo -n $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+  script:
+    - export NODE_PACKAGE_VERSION=`jq -r ".version" package.json`
+    - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
+    - export NODE_PACKAGE_VERSION=`jq -r ".version" package.json`
+    - echo $CI_REGISTRY_IMAGE:$NODE_PACKAGE_VERSION
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA $CI_REGISTRY_IMAGE:$NODE_PACKAGE_VERSION
+    - docker push $CI_REGISTRY_IMAGE:$NODE_PACKAGE_VERSION
