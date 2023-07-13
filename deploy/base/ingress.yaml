@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: web-ingress
+  namespace: set-time
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: setti.me
+      http:
+        paths:
+          - backend:
+              service:
+                name: web-service
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - setti.me
+      secretName: web-cert

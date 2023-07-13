@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-deployment
+  namespace: set-time
+spec:
+  replicas: 3
+  revisionHistoryLimit: 0
+  template:
+    spec:
+      imagePullSecrets:
+        - name: gitlab-registry-secret
+      containers:
+        - name: web
+          image: registry.git.willperry.net/set-time/web:0.7.0 # {"$imagepolicy": "set-time:live-image-policy"}
+          ports:
+            - containerPort: 8080
