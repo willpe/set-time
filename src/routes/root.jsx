@@ -23,7 +23,7 @@ export default function Root() {
 
   const urlParams = new URLSearchParams(window.location.search);
   const timeOptions = {
-    interval: urlParams.get("ti") || 15000,
+    interval: urlParams.get("ti") || 15,
     start: urlParams.get("ts"),
     velocity: urlParams.get("tv"),
   };
