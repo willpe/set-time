@@ -1,16 +1,18 @@
 import { useContext, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { TimeContext } from "../contexts/TimeContext";
+import TimeGrid from "../TimeGrid";
 
 import Set from "./Set";
-import useTimeGrid from "../hooks/UseTimeGrid";
+
+const shortTimeStyle = { hourCycle: "h23", timeStyle: "short" };
 
 export default function Day({ day }) {
   const { time, isHappeningNow } = useContext(TimeContext);
   const isNow = isHappeningNow(day.opens, day.closes);
 
-  const timeGrid = useTimeGrid(day);
-  const currentTimeOffset = timeGrid.getCurrentTimeLinePosition(time, day.opens, day.closes);
+  const timeGrid = useMemo(() => new TimeGrid(day, time), [day]);
+  const currentTimePositions = useMemo(() => timeGrid.calculateTimeLinePosition(time), [timeGrid, time]);
 
   function GridLines() {
     const content = [];
@@ -18,11 +20,7 @@ export default function Day({ day }) {
       content.push(<div data-hour={startTime.getHours()} key={startRow} style={{ gridRowStart: startRow }}></div>);
     });
 
-    return (
-      <div className="gridlines" data-range={`from ${timeGrid.startTimeString} to ${timeGrid.endTimeString}`}>
-        {content}
-      </div>
-    );
+    return <div className="gridlines">{content}</div>;
   }
 
   function TimeScale() {
@@ -30,19 +28,15 @@ export default function Day({ day }) {
     timeGrid.forEachHour((startRow, startTime) => {
       content.push(
         <div key={startRow} style={{ gridRowStart: startRow - 3 }}>
-          {timeGrid.toTimeString(startTime)}
+          {startTime.toLocaleTimeString("en-us", { hour: "numeric" })}
         </div>
       );
     });
 
     // Fill out the grid for the last hour
-    content.push(<div key="final" style={{ gridRowStart: timeGrid.rows - 1 }} />);
+    content.push(<div key="final" style={{ gridRowStart: timeGrid.endRow + 4 }} />);
 
-    return (
-      <div className="times" data-range={`from ${timeGrid.startTimeString} to ${timeGrid.endTimeString}`}>
-        {content}
-      </div>
-    );
+    return <div className="times">{content}</div>;
   }
 
   const singleStage = day.stages.length === 1;
@@ -72,7 +66,10 @@ export default function Day({ day }) {
                   <Set key={set.id} timeGrid={timeGrid} set={set} stage={stage} day={day} />
                 ))}
                 {isNow ? (
-                  <div className="current-time" style={{ height: `${currentTimeOffset}%` }}>
+                  <div
+                    className="current-time"
+                    style={{ top: `${currentTimePositions.header}%`, height: `${currentTimePositions.line}%` }}
+                  >
                     <div className="current-time-line"></div>
                   </div>
                 ) : null}

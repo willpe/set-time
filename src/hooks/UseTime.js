@@ -50,7 +50,7 @@ export default function useTime(options) {
 
         // Avoid rapidly updates to state
         newTime.setMilliseconds(0);
-        console.log(`Tick: ${newTime.toLocaleTimeString([], shortTimeStyle)}`);
+        console.debug(`[clock] Tick: ${newTime.toLocaleTimeString([], shortTimeStyle)}\n      ${newTime}`);
 
         return newTime;
       });
@@ -66,11 +66,11 @@ export default function useTime(options) {
     // Start/stop the clock on visibility change
     function onVisibilityChange() {
       if (document.visibilityState === "visible") {
-        console.info(`Became visible, starting clock`);
+        console.debug(`[clock] Became visible, starting clock`);
         clockEnabled = true;
         throttledClockUpdate();
       } else {
-        console.info(`Became hidden, stopping clock`);
+        console.debug(`[clock] Became hidden, stopping clock`);
         clockEnabled = false;
       }
     }

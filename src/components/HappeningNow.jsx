@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { FestivalContext } from "../contexts/FestivalContext";
 import { TimeContext } from "../contexts/TimeContext";
-import useTimeGrid from "../hooks/UseTimeGrid";
+import TimeGrid from "../TimeGrid";
 
 import Set from "./Set";
 
@@ -20,7 +20,8 @@ export default function HappeningNow() {
       </div>
     );
 
-  const timeGrid = useTimeGrid(today);
+  const timeGrid = useMemo(() => new TimeGrid(day), [day]);
+
   const now = [];
   const startingSoon = [];
   today.stages.forEach((stage) => {

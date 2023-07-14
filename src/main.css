@@ -576,10 +576,9 @@ section.now {
       .current-time {
         position: absolute;
         align-items: flex-end;
-        top: calc(10 * var(--row-height));
+        top: calc(12 * var(--row-height));
         left: 0;
         right: 0;
-        height: 2px;
         background-color: var(--color-teal-100-40);
 
         z-index: 100;
