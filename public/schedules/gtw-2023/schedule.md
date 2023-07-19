@@ -74,7 +74,7 @@
 - 15:00-16:00 Nicky Elisabeth
 - 16:00-17:00 Nils Hoffman (Live)
 - 17:00-18:10 Durante & HANA
-- 18:10-19:20 CRi (DJ Set)
+- 18:10-19:20 Qrion
 - 19:20-20:30 Simon Doty
 - 20:30-21:40 James Grant & Jody Wisternoff
 - 21:40-22:50 Tinlicker
