@@ -15,4 +15,4 @@ replicas:
     count: 1
 images:
   - name: registry.git.willperry.net/set-time/web
-    newTag: 0.7.17-ci.748 # {"$imagepolicy": "set-time:web-ci-image-policy:tag"}
+    newTag: 0.7.18-ci.749 # {"$imagepolicy": "set-time:web-ci-image-policy:tag"}
