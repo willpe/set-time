@@ -12,6 +12,6 @@ spec:
         - name: gitlab-registry-secret
       containers:
         - name: web
-          image: registry.git.willperry.net/set-time/web:0.7.17 # {"$imagepolicy": "set-time:web-live-image-policy"}
+          image: registry.git.willperry.net/set-time/web:0.7.18 # {"$imagepolicy": "set-time:web-live-image-policy"}
           ports:
             - containerPort: 8080
