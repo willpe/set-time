@@ -1,20 +1,23 @@
 # Thursday July 20, 2023
 
 ## Ora Upstairs
+
 - 21:00-22:40 Amy Wiles (Warm Up Party)
-- 22:40-00:20 TBD (Warm Up Party)
+- 22:40-00:20 Anamē (Warm Up Party)
 - 00:20-02:00 Andrew Bayer (Warm Up Party)
 
 ## Ora Front Room
-- 21:00-00:00 Alex Sonata & TheRio (Warm Up Party)
-- 00:00-02:00 anamē (Warm Up Party)
+
+- 22:00-00:00 Adrian Alexander (Warm Up Party)
+- 00:00-02:00 Alex Sonata & TheRio (Warm Up Party)
 
 ## Ora Back Room
-- 21:00-22:30 Adrian Alexander (Warm Up Party)
-- 22:30-00:00 Elevven (Warm Up Party)
+
+- 22:00-00:00 Elevven (Warm Up Party)
 - 00:00-02:00 Avenue One (Warm Up Party)
 
 ## Q Nightclub
+
 - 21:00-22:15 Daniel Curpen (Warm Up Party)
 - 22:15-23:30 Durante & HANA (Warm Up Party)
 - 23:30-00:45 Simon Doty (Warm Up Party)
@@ -30,9 +33,11 @@
 - 22:30-00:00 Tony McGuinness b2b Gabriel & Dresden
 
 ## Camp Anjuna
+
 - 23:00-02:00 CRi pres. Friends in Secret
 
 ## Anjunafam Dome
+
 - 18:00-20:00 Anjuna Family Meet & Greet with The Instigators
 - 20:00-22:00 Totem Making 101 with LazerPantz
 - 22:00-02:00 Climate Canvas with Anjunafamily DJs
@@ -58,6 +63,7 @@
 - 20:00-21:30 Alex Sonata & TheRio
 
 ## Camp Anjuna
+
 - 10:00-13:00 Daybreaker Experience
 - 13:30-14:30 It's a Beautiful World (anamē Live Podcast)
 - 15:00-16:00 Envisioning Future Festivals
@@ -65,6 +71,7 @@
 - 01:30-04:00 Club Quarantine with Gabriel & Dresden (Silent Disco)
 
 ## Anjunafam Dome
+
 - 11:00-13:00 The Instigators Parasol Decorating Party
 - 13:30-15:00 Secret Album Listening Session
 - 16:00-16:50 Being a Peacock Amongst the Pigeons
@@ -93,11 +100,13 @@
 - 17:30-20:30 Martin Roth
 
 ## Camp Anjuna
+
 - 10:00-11:30 Power Fusion Yin Yoga with Fitzjoy
 - 11:45-12:45 A State of Anjuna
 - 13:00-14:00 Daybreaker Breathwork
 
 ## Anjunafam Dome
+
 - 11:00-11:50 Fun with The Instigators
 - 12:00-13:20 How to DJ with Subset
 - 13:30-15:00 Become a Climate Defender
