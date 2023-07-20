@@ -14,4 +14,4 @@ replicas:
     count: 3
 images:
   - name: registry.git.willperry.net/set-time/web
-    newTag: 0.7.18 # {"$imagepolicy": "set-time:web-live-image-policy:tag"}
+    newTag: 0.7.19 # {"$imagepolicy": "set-time:web-live-image-policy:tag"}
