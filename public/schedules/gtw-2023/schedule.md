@@ -14,6 +14,12 @@
 - 22:30-00:00 Elevven (Warm Up Party)
 - 00:00-02:00 Avenue One (Warm Up Party)
 
+## Q Nightclub
+- 21:00-22:15 Daniel Curpen (Warm Up Party)
+- 22:15-23:30 Durante & HANA (Warm Up Party)
+- 23:30-00:45 Simon Doty (Warm Up Party)
+- 00:45-02:00 Nicky Elisabeth (Warm Up Party)
+
 # Friday July 21, 2023
 
 ## The Meadow
