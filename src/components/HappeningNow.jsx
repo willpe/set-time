@@ -20,7 +20,7 @@ export default function HappeningNow() {
       </div>
     );
 
-  const timeGrid = useMemo(() => new TimeGrid(day), [day]);
+  const timeGrid = useMemo(() => new TimeGrid(today), [today]);
 
   const now = [];
   const startingSoon = [];
