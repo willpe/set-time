@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import { FestivalContext } from "../contexts/FestivalContext";
 import { TimeContext } from "../contexts/TimeContext";
 import TimeGrid from "../TimeGrid";
