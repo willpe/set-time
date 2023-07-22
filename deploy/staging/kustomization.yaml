@@ -15,4 +15,4 @@ replicas:
     count: 3
 images:
   - name: registry.git.willperry.net/set-time/web
-    newTag: 0.7.22-preview.753 # {"$imagepolicy": "set-time:web-preview-image-policy:tag"}
+    newTag: 0.7.23-preview.754 # {"$imagepolicy": "set-time:web-preview-image-policy:tag"}
