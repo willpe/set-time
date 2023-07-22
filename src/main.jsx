@@ -28,8 +28,10 @@ const router = createBrowserRouter([
         path: ":festivalId",
         element: <Festival />,
         loader: festivalLoader,
+        errorElement: <ErrorPage />,
         children: [
-          { index: true, element: <FestivalIndex />, loader: festivalLoader },
+          // { index: true, element: <FestivalIndex />, loader: festivalLoader },
+          { index: true, element: <Schedule /> },
           { path: "schedule", element: <Schedule /> },
           { path: "now", element: <HappeningNow /> },
           { path: "starred", element: <StarredSets /> },

@@ -29,13 +29,13 @@ export async function loader({ params }) {
 }
 
 export function FestivalIndex() {
-  const { festival } = useLoaderData();
-  const { isHappeningNow } = useContext(TimeContext);
+  // const { festival } = useLoaderData();
+  // const { isHappeningNow } = useContext(TimeContext);
 
-  const today = festival.schedule.days.find((day) => isHappeningNow(day.opens, day.closes));
-  if (today) {
-    return <Navigate to="./now" />;
-  }
+  // const today = festival.schedule.days.find((day) => isHappeningNow(day.opens, day.closes));
+  // if (today) {
+  //   return <Navigate to="./now" />;
+  // }
 
   return <Navigate to="./schedule" />;
 }
