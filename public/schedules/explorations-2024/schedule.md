@@ -105,9 +105,7 @@ Sure, here is the full schedule from Thursday to Tuesday in markdown format:
 
 ## Poolside Sessions
 
-- 15:00-16:30 HANA b2b Nicky Elisabeth b2b Qrion
-- 16:30-18:00 PROFF
-- 18:00-20:00 Luttrell’s Happy Hour
+- 15:00-20:00 HANA b2b Nicky Elisabeth b2b Qrion
 
 ## Wellness
 
@@ -151,7 +149,7 @@ Sure, here is the full schedule from Thursday to Tuesday in markdown format:
 
 ## Gjipe
 
-- 12:00-15:00 SunRyse
+- 12:00-15:00 SunrYse
 - 15:00-18:00 anamē b2b P.O.S
 
 ## Poolside Sessions
