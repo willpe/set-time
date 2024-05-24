@@ -4,6 +4,15 @@ export async function loader() {
   return {
     festivals: [
       {
+        name: "Explorations 2024",
+        id: "explorations-2024",
+        startDate: "June 13, 2024",
+        endDate: "July 18, 2024",
+        location: {
+          name: "Dhermi, Albania",
+        },
+      },
+      {
         name: "Group Therapy Weekender",
         id: "gtw-2023",
         startDate: "July 21, 2023",
