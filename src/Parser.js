@@ -66,7 +66,7 @@ function parseTime(time, date) {
 function parsePerformance(value) {
   let artist = value;
   let notes = null;
-  let b2b = null;
+  let b2b = [];
 
   // if the performance ends with notes, like (Live), then extract them out
   const match = value.match(/^(.*)\((.*)\)$/);
@@ -79,7 +79,7 @@ function parsePerformance(value) {
   const artists = value.split(" b2b ");
   if (artists.length > 1) {
     artist = artists[0];
-    b2b = artists[1];
+    b2b = artists.slice(1);
   }
 
   return {
