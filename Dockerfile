@@ -5,7 +5,6 @@ COPY package-lock.json .
 RUN npm install
 
 COPY ./ .
-ENV VITE_API_BASE_URL="https://api.setti.me"
 RUN npm run build
 
 FROM nginx:alpine
