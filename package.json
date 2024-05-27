@@ -29,6 +29,6 @@
     "postcss-nested": "^6.0.1",
     "vite": "^4.3.2",
     "vite-plugin-pwa": "^0.16.3",
-    "vite-plugin-svgr": "^3.2.0"
+    "vite-plugin-svgr": "^4.2.0"
   }
 }
