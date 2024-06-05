@@ -18,6 +18,10 @@ Sure, here is the full schedule from Thursday to Tuesday in markdown format:
 - 22:00-01:00 Carina Lawrence
 - 01:00-04:00 M.O.S.
 
+## Havana Beach Club
+- 16:00-18:00 Mark Novas
+- 18:00-20:00 Rezident
+
 # Friday June 14, 2024
 
 ## Empire
@@ -35,15 +39,15 @@ Sure, here is the full schedule from Thursday to Tuesday in markdown format:
 
 ## The Cove
 
-- 12:00-15:00 Tej Lyn
-- 15:00-18:00 Ryan Davis
-- 18:00-21:00 Claxy
+- 12:00-15:30 Tej Lyn
+- 15:30-18:30 Ryan Davis
+- 18:30-21:00 Claxy (Live)
 - 21:00-00:00 Braxton
 - 00:00-03:00 Durante
 
 ## Yacht Club
 
-- 19:00-22:00 Local
+- 19:00-22:00 Chriss V
 - 22:00-01:00 Just Her
 - 01:00-03:00 Jody Barr
 
@@ -65,6 +69,9 @@ Sure, here is the full schedule from Thursday to Tuesday in markdown format:
 - 13:00-14:00 Anjuna Fan Painting
 - 17:00-18:00 Anjuna Run
 - 18:00-19:00 Sunset Yoga
+
+## Dining
+- 19:00-20:30 Talee
 
 # Saturday June 15, 2024
 
@@ -115,6 +122,9 @@ Sure, here is the full schedule from Thursday to Tuesday in markdown format:
 - 17:00-18:00 Waterfall Nature Walk
 - 18:00-19:00 Secret Beach Meditation
 
+## Dining
+- 19:00-20:30 Braxton
+
 # Sunday June 16, 2024
 
 ## Empire
@@ -164,6 +174,9 @@ Sure, here is the full schedule from Thursday to Tuesday in markdown format:
 - 12:00-14:00 Cacao Circle
 - 17:00-19:00 Fire & Ice
 
+## Dining
+- 19:00-20:30 Leaving Laurel
+
 # Monday June 17, 2024
 
 ## Empire
@@ -175,7 +188,7 @@ Sure, here is the full schedule from Thursday to Tuesday in markdown format:
 
 ## Splendor
 
-- 21:00-23:00 Local
+- 21:00-23:00 Bani D
 - 23:00-01:00 Sinca
 - 01:00-03:00 Jody Wisternoff
 - 03:00-05:00 Luttrell
@@ -183,7 +196,7 @@ Sure, here is the full schedule from Thursday to Tuesday in markdown format:
 ## The Cove
 
 - 12:00-15:00 Igor Garanin
-- 15:00-18:00 Local
+- 15:00-18:00 Andi Q
 - 18:00-21:00 Volen Sentir
 - 21:00-00:00 Nils Hoffmann (DJ Set)
 - 00:00-03:00 Cornelius SA
@@ -212,12 +225,15 @@ Sure, here is the full schedule from Thursday to Tuesday in markdown format:
 - 17:00-18:00 Beach Boxing
 - 18:00-19:00 Sundown Yoga & Live Sound
 
+## Dining
+- 19:00-20:30 Chris Luno
+
 # Tuesday June 18, 2024
 
 ## Empire
 
-- 21:00-23:00 Mia Aurora
-- 23:00-01:00 Nils Hoffmann (Live)
+- 21:00-23:30 Mia Aurora
+- 23:30-01:00 Nils Hoffmann (Live)
 - 01:00-04:00 Anyasa
 
 ## The Cove
@@ -229,7 +245,7 @@ Sure, here is the full schedule from Thursday to Tuesday in markdown format:
 
 ## Yacht Club
 
-- 19:00-22:00 Local
+- 19:00-22:00 TEELCO
 - 22:00-01:00 Boxer
 - 01:00-03:00 Enamour
 
@@ -241,6 +257,10 @@ Sure, here is the full schedule from Thursday to Tuesday in markdown format:
 ## Poolside Sessions
 
 - 15:00-20:00 Jody Wisternoff & Friends
+
+## Havana Beach Club
+- 16:00-18:00 Michael Cassette
+- 18:00-20:00 anamē
 
 ## Wellness
 
