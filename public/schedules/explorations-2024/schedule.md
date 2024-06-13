@@ -1,5 +1,3 @@
-Sure, here is the full schedule from Thursday to Tuesday in markdown format:
-
 # Thursday June 13, 2024
 
 ## Splendor
