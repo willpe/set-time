@@ -579,7 +579,7 @@ section.now {
         top: calc(12 * var(--row-height));
         left: 0;
         right: 0;
-        background-color: var(--color-teal-100-40);
+        background-color: var(--color-teal-100-15);
 
         z-index: 100;
 
