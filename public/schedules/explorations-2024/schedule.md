@@ -18,7 +18,8 @@
 
 ## Havana Beach Club
 - 16:00-18:00 Mark Novas
-- 18:00-20:00 Rezident
+- 18:00-19:30 Rezident
+- 19:30-21:00 P.O.S. (Surprise Set)
 
 # Friday June 14, 2024
 
