@@ -70,7 +70,7 @@
 - 18:00-19:00 Sunset Yoga
 
 ## Dining
-- 19:00-20:30 Talee
+- 18:00-21:00 Talee (Bus at 17:30)
 
 # Saturday June 15, 2024
 
@@ -122,7 +122,7 @@
 - 18:00-19:00 Secret Beach Meditation
 
 ## Dining
-- 19:00-20:30 Braxton
+- 18:00-21:00 Braxton (Bus at 17:30)
 
 # Sunday June 16, 2024
 
@@ -174,7 +174,7 @@
 - 17:00-19:00 Fire & Ice
 
 ## Dining
-- 19:00-20:30 Leaving Laurel
+- 18:00-21:00 Leaving Laurel (Bus at 17:30)
 
 # Monday June 17, 2024
 
@@ -225,7 +225,7 @@
 - 18:00-19:00 Sundown Yoga & Live Sound
 
 ## Dining
-- 19:00-20:30 Chris Luno
+- 18:00-21:00 Chris Luno (Bus at 17:30)
 
 # Tuesday June 18, 2024
 
