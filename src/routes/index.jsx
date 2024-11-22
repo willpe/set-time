@@ -4,6 +4,14 @@ export async function loader() {
   return {
     festivals: [
       {
+        name: "Dreamstate SoCal 2024",
+        id: "dreamstate-socal-2024",
+        startDate: "November 22, 2024",
+        endDate: "November 23, 2024",
+        location: {
+          name: "Long Beach, CA",
+        },
+      },{
         name: "Explorations 2024",
         id: "explorations-2024",
         startDate: "June 13, 2024",
