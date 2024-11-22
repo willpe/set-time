@@ -58,7 +58,6 @@
 
 ## The Dream
 
-- 00:00-01:00 Andrew Bayer  
 - 13:00-14:00 Julian Gray  
 - 14:00-15:00 Grigore  
 - 15:00-16:00 Laura van Dam  
@@ -68,10 +67,10 @@
 - 19:30-20:45 Paul van Dyk  
 - 20:45-21:55 Ferry Corsten Pres Gouryella  
 - 22:00-00:00 Above & Beyond  
+- 00:00-01:00 Andrew Bayer
 
 ## The Sequence
 
-- 00:00-01:00 Vini Vici  
 - 13:00-14:15 Khromata  
 - 14:15-15:30 Animato  
 - 15:30-16:45 Sonic Species  
@@ -80,7 +79,8 @@
 - 19:00-20:00 Giorgia Angiuli  
 - 20:00-21:15 Captain Hook  
 - 21:15-22:45 Outsiders & Electric Universe Pres Outside the Universe  
-- 22:45-00:00 Ace Ventura  
+- 22:45-00:00 Ace Ventura
+- 00:00-01:00 Vini Vici
 
 ## The Vision
 
