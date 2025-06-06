@@ -4,6 +4,15 @@ export async function loader() {
   return {
     festivals: [
       {
+        name: "Explorations 2025",
+        id: "explorations-2025",
+        startDate: "June 12, 2025",
+        endDate: "June 17, 2025",
+        location: {
+          name: "Dhermi, Albania",
+        },
+      },
+      {
         name: "Explorations 2024",
         id: "explorations-2024",
         startDate: "June 13, 2024",
